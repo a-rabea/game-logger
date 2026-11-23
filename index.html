@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAME LOGGER · Ahmed's PC Library & Taste Intelligence</title>
+  <meta name="theme-color" content="#0B0E14" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Game Logger" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0E14'/%3E%3Crect x='6' y='6' width='52' height='52' rx='11' fill='none' stroke='%2322d3ee' stroke-width='4'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='26' font-weight='700' text-anchor='middle' fill='%2322d3ee'%3EGL%3C/text%3E%3C/svg%3E" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            obsidian: '#0B0E14',
+            card: '#131822',
+            cardHover: '#181F2C',
+            borderSubtle: '#1F2937',
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #0B0E14;
+      color: #F3F4F6;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B0E14;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1F2937;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #374151;
+    }
+    .steam-aspect {
+      aspect-ratio: 460 / 215;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-indigo-500/30 selection:text-indigo-200">
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-30 bg-[#0B0E14]/90 backdrop-blur-md border-b border-[#1F2937]">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-3">
+      <!-- Brand -->
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-9 h-9 shrink-0 rounded-lg bg-gradient-to-br from-indigo-500 via-cyan-500 to-emerald-500 p-[1px]">
+          <div class="w-full h-full bg-[#0B0E14] rounded-[7px] flex items-center justify-center">
+            <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" />
+            </svg>
+          </div>
+        </div>
+        <div class="hidden md:block">
+          <div class="flex items-center gap-2">
+            <h1 class="font-bold tracking-tight text-white text-base sm:text-lg leading-none whitespace-nowrap">GAME LOGGER</h1>
+            <span class="hidden sm:inline-block font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-[#131822] border border-[#1F2937] text-cyan-400">PC · v2.4</span>
+          </div>
+          <p class="text-xs text-gray-400 mt-0.5 whitespace-nowrap">Ahmed's Library & Taste Intelligence</p>
+        </div>
+      </div>
+
+      <!-- Center View Switcher -->
+      <nav class="flex items-center bg-[#131822] p-1 rounded-xl border border-[#1F2937]">
+        <button id="tab-dashboard" onclick="switchView('dashboard')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5 bg-indigo-600 text-white shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+          <span class="hidden sm:inline">Dashboard</span>
+        </button>
+        <button id="tab-library" onclick="switchView('library')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5 text-gray-400 hover:text-white">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
+          <span class="hidden sm:inline">Library</span>
+          <span id="nav-count" class="font-mono text-[11px] px-1.5 py-0.2 bg-[#1F2937] text-gray-300 rounded">—</span>
+        </button>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <!-- Sheet Sync Badge -->
+        <button id="sync-badge" onclick="openSettings()" title="Google Sheet sync" class="hidden sm:flex items-center gap-1.5 px-2.5 py-2 rounded-lg bg-[#131822] hover:bg-[#181F2C] border border-[#1F2937] text-[11px] font-mono text-gray-400 transition-colors">
+          <span id="sync-dot" class="w-2 h-2 rounded-full bg-gray-500"></span>
+          <span id="sync-label">Local only</span>
+        </button>
+        <button id="sync-badge-mobile" onclick="openSettings()" title="Google Sheet sync" class="sm:hidden p-2 rounded-lg bg-[#131822] border border-[#1F2937]">
+          <span id="sync-dot-mobile" class="block w-2.5 h-2.5 rounded-full bg-gray-500"></span>
+        </button>
+        <!-- Portability Dropdown -->
+        <div class="relative" id="data-menu-container">
+          <button onclick="toggleDataMenu()" title="Export / Reset Data" class="p-2 rounded-lg bg-[#131822] hover:bg-[#181F2C] border border-[#1F2937] text-gray-300 hover:text-white transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+          </button>
+          <div id="data-menu" class="hidden absolute right-0 mt-2 w-56 rounded-xl bg-[#131822] border border-[#1F2937] shadow-2xl py-1.5 z-50">
+            <div class="px-3 py-1.5 border-b border-[#1F2937]">
+              <p class="text-[11px] font-mono uppercase tracking-wider text-gray-400">Sync & Portability</p>
+            </div>
+            <button onclick="exportCSV()" class="w-full text-left px-3.5 py-2 text-xs text-gray-200 hover:bg-[#1F2937] flex items-center justify-between">
+              <span>Export Google Sheet CSV</span>
+              <span class="font-mono text-[10px] text-emerald-400">.csv</span>
+            </button>
+            <button onclick="exportJSON()" class="w-full text-left px-3.5 py-2 text-xs text-gray-200 hover:bg-[#1F2937] flex items-center justify-between">
+              <span>Export Full Backup</span>
+              <span class="font-mono text-[10px] text-cyan-400">.json</span>
+            </button>
+            <div class="border-t border-[#1F2937] my-1"></div>
+            <button onclick="menuPull()" class="w-full text-left px-3.5 py-2 text-xs text-gray-200 hover:bg-[#1F2937] flex items-center justify-between">
+              <span>Pull latest from Sheet</span>
+              <span class="font-mono text-[10px] text-cyan-400">↻</span>
+            </button>
+            <button onclick="document.getElementById('data-menu').classList.add('hidden'); openSettings()" class="w-full text-left px-3.5 py-2 text-xs text-gray-200 hover:bg-[#1F2937] flex items-center justify-between">
+              <span>Sheet Sync Settings</span>
+              <span class="font-mono text-[10px] text-gray-400">⚙</span>
+            </button>
+            <div class="border-t border-[#1F2937] my-1"></div>
+            <button onclick="openResetConfirm()" class="w-full text-left px-3.5 py-2 text-xs text-rose-400 hover:bg-rose-500/10 flex items-center justify-between">
+              <span>Reset to Built-in Snapshot</span>
+              <span class="font-mono text-[10px]" data-seed-count>58</span>
+            </button>
+          </div>
+        </div>
+
+        <button onclick="openGameModal()" class="px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-950/50">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          <span class="hidden sm:inline">Add Game</span>
+          <span class="sm:hidden">Add</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Toast Banner -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 hidden transform transition-all duration-300">
+    <div id="toast-box" class="bg-[#131822] border border-emerald-500/40 text-gray-100 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-medium max-w-xs">
+      <span id="toast-dot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+      <span id="toast-msg">Saved to library</span>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: DASHBOARD (ANALYTICS & INTELLIGENCE) -->
+    <!-- ========================================== -->
+    <section id="view-dashboard" class="space-y-6">
+      <!-- Top 6 KPI Cards -->
+      <div id="kpi-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5"></div>
+
+      <!-- Row 2: Status Breakdown + What Makes You Finish -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Status Breakdown -->
+        <div class="lg:col-span-5 bg-[#131822] border border-[#1F2937] rounded-2xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h2 class="text-sm font-bold uppercase tracking-wider text-gray-200">Library Breakdown</h2>
+                <p class="text-xs text-gray-400 mt-0.5">Distribution across lifecycle stages</p>
+              </div>
+              <span class="font-mono text-xs text-gray-400" id="breakdown-total">46 total</span>
+            </div>
+            <div id="status-bars" class="space-y-3"></div>
+          </div>
+          <div class="mt-5 pt-3.5 border-t border-[#1F2937] flex items-center justify-between text-xs text-gray-400">
+            <span>Formula: <code class="font-mono text-gray-300">Completed ÷ (Completed + Dropped)</code></span>
+            <span class="text-cyan-400 font-mono">Parked excluded</span>
+          </div>
+        </div>
+
+        <!-- What Makes You Finish a Game -->
+        <div class="lg:col-span-7 bg-[#131822] border border-[#1F2937] rounded-2xl p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+              <div>
+                <h2 class="text-sm font-bold uppercase tracking-wider text-gray-200">What Makes You Finish a Game</h2>
+                <p class="text-xs text-gray-400 mt-0.5">Completed vs. Dropped average scores across pillars</p>
+              </div>
+              <div class="flex items-center gap-3 text-xs font-mono">
+                <span class="flex items-center gap-1.5 text-emerald-400"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span>Completed</span>
+                <span class="flex items-center gap-1.5 text-rose-400"><span class="w-2.5 h-2.5 rounded-sm bg-rose-500"></span>Dropped</span>
+              </div>
+            </div>
+            <div id="finish-signal-bars" class="space-y-3.5"></div>
+          </div>
+          <!-- Dynamic Taste Callout -->
+          <div id="taste-signal-callout" class="mt-5 p-3.5 rounded-xl bg-[#0B0E14] border border-indigo-500/30 flex items-start gap-3">
+            <div class="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-400 mt-0.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+            </div>
+            <div class="text-xs text-gray-300 leading-relaxed" id="taste-signal-text"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: Core Hook Performance + Length & World Finish Rates -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Core Hook Performance -->
+        <div class="lg:col-span-6 bg-[#131822] border border-[#1F2937] rounded-2xl p-5">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 class="text-sm font-bold uppercase tracking-wider text-gray-200">Core Hook Performance</h2>
+              <p class="text-xs text-gray-400 mt-0.5">What psychological hook keeps you locked in</p>
+            </div>
+            <span class="font-mono text-[11px] text-gray-400">Avg Rating · Finish %</span>
+          </div>
+          <div id="hook-breakdown" class="space-y-2.5"></div>
+        </div>
+
+        <!-- Length & World Finish Rates -->
+        <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <!-- Length Tier -->
+          <div class="bg-[#131822] border border-[#1F2937] rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <h2 class="text-sm font-bold uppercase tracking-wider text-gray-200">Length Sweet Spot</h2>
+              <p class="text-xs text-gray-400 mt-0.5 mb-4">Completion by runtime tier</p>
+              <div id="length-breakdown" class="space-y-3"></div>
+            </div>
+            <p class="text-[11px] text-gray-400 mt-4 pt-3 border-t border-[#1F2937]">Short (&lt;10h) · Medium (10–25h) · Long (25–50h) · Massive (50h+)</p>
+          </div>
+
+          <!-- World Structure -->
+          <div class="bg-[#131822] border border-[#1F2937] rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <h2 class="text-sm font-bold uppercase tracking-wider text-gray-200">World Structure</h2>
+              <p class="text-xs text-gray-400 mt-0.5 mb-4">Open vs. Semi-open vs. Linear</p>
+              <div id="world-breakdown" class="space-y-3"></div>
+            </div>
+            <p class="text-[11px] text-gray-400 mt-4 pt-3 border-t border-[#1F2937]">Checklist bloat triggers drops, not open worlds themselves.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 4: Formula Fatigue + The Dealbreaker + Vibe Bonus -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Formula Fatigue (Franchises 2+) -->
+        <div class="lg:col-span-5 bg-[#131822] border border-[#1F2937] rounded-2xl p-5">
+          <div class="flex items-center justify-between mb-3.5">
+            <div>
+              <h2 class="text-sm font-bold uppercase tracking-wider text-gray-200">Formula Fatigue</h2>
+              <p class="text-xs text-gray-400 mt-0.5">Franchises with 2+ logged games</p>
+            </div>
+            <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-[#0B0E14] border border-[#1F2937] text-gray-400">Multi-entry</span>
+          </div>
+          <div id="franchise-fatigue" class="space-y-2 max-h-64 overflow-y-auto pr-1"></div>
+        </div>
+
+        <!-- The Dealbreaker & Vibe Bonus -->
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <!-- The Dealbreaker -->
+          <div class="bg-[#131822] border border-[#1F2937] rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-xs uppercase tracking-wider text-rose-400 font-semibold">The Dealbreaker</span>
+                <span class="px-2 py-0.5 rounded-full text-[11px] font-mono bg-rose-500/10 text-rose-400 border border-rose-500/20">↻ Repetition</span>
+              </div>
+              <div class="mt-3 flex items-baseline gap-2">
+                <span id="repetition-pct" class="text-3xl font-extrabold font-mono text-white">43%</span>
+                <span id="repetition-sub" class="text-xs text-gray-400">of reviewed games</span>
+              </div>
+              <p class="text-xs text-gray-400 mt-2 leading-relaxed">Auto-flagged whenever <code class="text-gray-300 font-mono">Disliked</code> cites repetition, fetch quests, bloat, or formula padding.</p>
+            </div>
+            <div id="repetition-tags" class="mt-4 pt-3 border-t border-[#1F2937] flex flex-wrap gap-1.5"></div>
+          </div>
+
+          <!-- Emotional Peak / Vibe Bonus -->
+          <div class="bg-[#131822] border border-[#1F2937] rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-xs uppercase tracking-wider text-amber-400 font-semibold">Vibe Bonus Outliers</span>
+                <span class="px-2 py-0.5 rounded-full text-[11px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20">Overall − Sub Avg</span>
+              </div>
+              <p class="text-xs text-gray-400 mt-2">Games where atmosphere or power fantasy pushed your Overall score above the math:</p>
+              <div id="vibe-outliers" class="mt-3 space-y-2"></div>
+            </div>
+            <p class="text-[11px] text-gray-500 mt-3 pt-2.5 border-t border-[#1F2937]">Sub Avg = Mean(Story, Graphics, Gameplay)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 5: Hall of Fame + Up Next Queue -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Hall of Fame -->
+        <div class="lg:col-span-6 bg-[#131822] border border-[#1F2937] rounded-2xl p-5">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 class="text-sm font-bold uppercase tracking-wider text-gray-200 flex items-center gap-2">
+                <span class="text-amber-400">★</span> Hall of Fame
+              </h2>
+              <p class="text-xs text-gray-400 mt-0.5">Completed masterpieces rated 9.5 – 10</p>
+            </div>
+            <span id="hof-count" class="font-mono text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">4 titles</span>
+          </div>
+          <div id="hall-of-fame" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+        </div>
+
+        <!-- Up Next Queue -->
+        <div class="lg:col-span-6 bg-[#131822] border border-[#1F2937] rounded-2xl p-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <div>
+              <h2 class="text-sm font-bold uppercase tracking-wider text-gray-200">Up Next Queue</h2>
+              <p class="text-xs text-gray-400 mt-0.5" id="upnext-subtitle">Curated short-runtime palate cleansers</p>
+            </div>
+            <div class="flex items-center bg-[#0B0E14] p-0.5 rounded-lg border border-[#1F2937] text-xs">
+              <button id="upnext-btn-qw" onclick="setUpNextFilter('quickwin')" class="px-2.5 py-1 rounded-md font-medium bg-amber-500/20 text-amber-300 border border-amber-500/30 transition-all">Quick-Win Queue</button>
+              <button id="upnext-btn-all" onclick="setUpNextFilter('all')" class="px-2.5 py-1 rounded-md font-medium text-gray-400 hover:text-white transition-all">All Backlog</button>
+            </div>
+          </div>
+          <div id="upnext-list" class="space-y-2 max-h-80 overflow-y-auto pr-1"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: LIBRARY (CARDS + TABLE + FILTERS)  -->
+    <!-- ========================================== -->
+    <section id="view-library" class="hidden space-y-5">
+      <!-- Status Quick-Filter Pills -->
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div id="library-status-pills" class="flex flex-wrap items-center gap-1.5"></div>
+
+        <!-- Grid vs Table Toggle -->
+        <div class="flex items-center bg-[#131822] p-1 rounded-xl border border-[#1F2937]">
+          <button id="view-btn-grid" onclick="setLibraryLayout('grid')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-[#1F2937] text-white flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
+            Cards
+          </button>
+          <button id="view-btn-table" onclick="setLibraryLayout('table')" class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-400 hover:text-white flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" /></svg>
+            Table
+          </button>
+        </div>
+      </div>
+
+      <!-- Search & Secondary Dropdown Filters -->
+      <div class="bg-[#131822] border border-[#1F2937] rounded-2xl p-3.5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <!-- Search -->
+        <div class="lg:col-span-2 relative">
+          <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+          <input id="filter-search" type="text" oninput="renderLibrary()" placeholder="Search title, franchise, loved/disliked, notes..." class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-gray-500 outline-none transition-colors" />
+        </div>
+
+        <!-- Genre Filter -->
+        <select id="filter-genre" onchange="renderLibrary()" class="bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-3 py-2 text-xs text-gray-200 outline-none">
+          <option value="All">All Genres (10)</option>
+        </select>
+
+        <!-- Core Hook Filter -->
+        <select id="filter-hook" onchange="renderLibrary()" class="bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-3 py-2 text-xs text-gray-200 outline-none">
+          <option value="All">All Core Hooks</option>
+        </select>
+
+        <!-- Length & Sort -->
+        <div class="flex gap-2">
+          <select id="filter-length" onchange="renderLibrary()" class="w-1/2 bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-2.5 py-2 text-xs text-gray-200 outline-none">
+            <option value="All">Length: All</option>
+            <option value="Short">Short</option>
+            <option value="Medium">Medium</option>
+            <option value="Long">Long</option>
+            <option value="Massive">Massive</option>
+          </select>
+          <select id="filter-sort" onchange="renderLibrary()" class="w-1/2 bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-2.5 py-2 text-xs text-gray-200 outline-none">
+            <option value="default">Sort: Sheet Order</option>
+            <option value="rating-desc">Rating: High → Low</option>
+            <option value="title-asc">Title: A → Z</option>
+            <option value="vibe-desc">Vibe Bonus: High</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Results Count Bar -->
+      <div class="flex items-center justify-between text-xs text-gray-400 px-1">
+        <span id="library-showing-text">Showing 46 of 46 games</span>
+        <button onclick="resetFilters()" id="reset-filters-btn" class="hidden text-indigo-400 hover:text-indigo-300 font-medium">Clear active filters</button>
+      </div>
+
+      <!-- Card Grid Container -->
+      <div id="library-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
+
+      <!-- Compact Table Container -->
+      <div id="library-table-wrap" class="hidden bg-[#131822] border border-[#1F2937] rounded-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-[#1F2937] bg-[#0B0E14]/60 text-[11px] font-mono uppercase tracking-wider text-gray-400">
+                <th class="py-3 px-4">Game</th>
+                <th class="py-3 px-3">Status</th>
+                <th class="py-3 px-3 text-right">Overall</th>
+                <th class="py-3 px-3 text-right">Sub Avg</th>
+                <th class="py-3 px-3">Genre</th>
+                <th class="py-3 px-3">World</th>
+                <th class="py-3 px-3">Length</th>
+                <th class="py-3 px-3">Core Hook</th>
+                <th class="py-3 px-3">Flag</th>
+              </tr>
+            </thead>
+            <tbody id="library-table-body" class="divide-y divide-[#1F2937] text-xs"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- ADD / EDIT GAME MODAL                      -->
+  <!-- ========================================== -->
+  <div id="game-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-sm p-4 overflow-y-auto">
+    <div class="bg-[#131822] border border-[#1F2937] rounded-2xl max-w-2xl w-full shadow-2xl overflow-hidden my-auto">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-[#1F2937] flex items-center justify-between bg-[#0B0E14]/50">
+        <div>
+          <h3 id="modal-title" class="text-base font-bold text-white">Add Game to Library</h3>
+          <p class="text-xs text-gray-400 mt-0.5">Paste a Steam URL or App ID to auto-fetch header cover art</p>
+        </div>
+        <button onclick="closeGameModal()" class="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-[#1F2937]">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+
+      <!-- Modal Form -->
+      <form id="game-form" onsubmit="saveGameForm(event)" class="p-6 space-y-4 max-h-[82vh] overflow-y-auto">
+        <input type="hidden" id="form-id" />
+
+        <!-- Top Preview + Steam Auto-Extractor -->
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center bg-[#0B0E14] p-3.5 rounded-xl border border-[#1F2937]">
+          <div class="sm:col-span-5 steam-aspect rounded-lg overflow-hidden bg-[#131822] border border-[#1F2937] relative flex items-center justify-center">
+            <img id="form-cover-preview" src="" alt="Cover Preview" class="w-full h-full object-cover hidden" onload="this.classList.remove('hidden'); document.getElementById('form-cover-fallback').classList.add('hidden');" onerror="this.classList.add('hidden'); document.getElementById('form-cover-fallback').classList.remove('hidden');" />
+            <div id="form-cover-fallback" class="text-center p-2">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-gray-500 block">Steam Header</span>
+              <span class="text-xs text-gray-400 font-medium">460 × 215 Preview</span>
+            </div>
+          </div>
+          <div class="sm:col-span-7 space-y-2.5">
+            <div>
+              <label class="block text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1">Steam Store URL or App ID</label>
+              <input id="form-steam-input" type="text" oninput="handleSteamInput(this.value)" placeholder="e.g. 2358720 or https://store.steampowered.com/app/2358720/..." class="w-full bg-[#131822] border border-[#1F2937] focus:border-cyan-500 rounded-lg px-3 py-1.5 text-xs font-mono text-cyan-300 placeholder-gray-600 outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1">Cover Image URL (Auto-Generated)</label>
+              <input id="form-cover-url" type="text" oninput="updateCoverPreview(this.value)" placeholder="https://cdn.cloudflare.steamstatic.com/steam/apps/.../header.jpg" class="w-full bg-[#131822] border border-[#1F2937] focus:border-indigo-500 rounded-lg px-3 py-1.5 text-[11px] font-mono text-gray-300 placeholder-gray-600 outline-none" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Title & Status -->
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3.5">
+          <div class="sm:col-span-8">
+            <label class="block text-xs font-medium text-gray-300 mb-1">Game Title *</label>
+            <input id="form-title" type="text" required placeholder="e.g. Black Myth: Wukong" class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-3.5 py-2 text-sm text-white outline-none" />
+          </div>
+          <div class="sm:col-span-4">
+            <label class="block text-xs font-medium text-gray-300 mb-1">Status</label>
+            <select id="form-status" class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-3 py-2 text-sm text-white outline-none">
+              <option value="Backlog">Backlog</option>
+              <option value="Playing">Playing</option>
+              <option value="Completed">Completed</option>
+              <option value="Parked">Parked</option>
+              <option value="Dropped">Dropped</option>
+              <option value="Wishlist">Wishlist</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Taxonomy Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">Genre</label>
+            <select id="form-genre" class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-2.5 py-2 text-xs text-white outline-none"></select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">World</label>
+            <select id="form-world" class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-2.5 py-2 text-xs text-white outline-none">
+              <option value="Linear">Linear</option>
+              <option value="Semi-open">Semi-open</option>
+              <option value="Open">Open</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">Length</label>
+            <select id="form-length" class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-2.5 py-2 text-xs text-white outline-none">
+              <option value="Short">Short (&lt;10h)</option>
+              <option value="Medium">Medium (10–25h)</option>
+              <option value="Long">Long (25–50h)</option>
+              <option value="Massive">Massive (50h+)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-300 mb-1">Core Hook</label>
+            <select id="form-hook" class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-2.5 py-2 text-xs text-white outline-none"></select>
+          </div>
+        </div>
+
+        <!-- Franchise, Replay, Finished Date, Quick-Win Toggle -->
+        <div class="grid grid-cols-2 sm:grid-cols-12 gap-3 items-end">
+          <div class="col-span-2 sm:col-span-5">
+            <label class="block text-xs font-medium text-gray-300 mb-1">Franchise</label>
+            <input id="form-franchise" type="text" placeholder="e.g. Call of Duty" class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-3 py-2 text-xs text-white outline-none" />
+          </div>
+          <div class="sm:col-span-3">
+            <label class="block text-xs font-medium text-gray-300 mb-1">Replay?</label>
+            <select id="form-replay" class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-2.5 py-2 text-xs text-white outline-none">
+              <option value="">—</option>
+              <option value="Yes">Yes</option>
+              <option value="Maybe">Maybe</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="sm:col-span-4">
+            <label class="block text-xs font-medium text-gray-300 mb-1">Finished Date</label>
+            <input id="form-finished" type="text" placeholder="e.g. 23 Nov 2026" class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-3 py-2 text-xs text-white outline-none" />
+          </div>
+        </div>
+
+        <!-- Ratings Section with Live Sub Avg & Vibe Bonus -->
+        <div class="bg-[#0B0E14] border border-[#1F2937] rounded-xl p-4 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-300">Ratings (1 – 10)</span>
+            <div class="flex items-center gap-3 font-mono text-xs">
+              <span class="text-gray-400">Sub Avg: <strong id="live-sub-avg" class="text-white">—</strong></span>
+              <span class="text-gray-400">Vibe Bonus: <strong id="live-vibe-bonus" class="text-gray-400">—</strong></span>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div>
+              <label class="block text-[11px] font-mono text-emerald-400 mb-1">Overall</label>
+              <input id="form-overall" type="number" step="0.5" min="1" max="10" oninput="recalcModalMath()" placeholder="—" class="w-full bg-[#131822] border border-[#1F2937] focus:border-emerald-500 rounded-lg px-3 py-1.5 text-sm font-mono text-white outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono text-indigo-400 mb-1">Story</label>
+              <input id="form-story" type="number" step="0.5" min="1" max="10" oninput="recalcModalMath()" placeholder="—" class="w-full bg-[#131822] border border-[#1F2937] focus:border-indigo-500 rounded-lg px-3 py-1.5 text-sm font-mono text-white outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono text-cyan-400 mb-1">Graphics</label>
+              <input id="form-graphics" type="number" step="0.5" min="1" max="10" oninput="recalcModalMath()" placeholder="—" class="w-full bg-[#131822] border border-[#1F2937] focus:border-cyan-500 rounded-lg px-3 py-1.5 text-sm font-mono text-white outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-mono text-amber-400 mb-1">Gameplay</label>
+              <input id="form-gameplay" type="number" step="0.5" min="1" max="10" oninput="recalcModalMath()" placeholder="—" class="w-full bg-[#131822] border border-[#1F2937] focus:border-amber-500 rounded-lg px-3 py-1.5 text-sm font-mono text-white outline-none" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Loved / Disliked / Notes -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-emerald-400 mb-1">Loved</label>
+            <input id="form-loved" type="text" placeholder="What hooked you?" class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-emerald-500 rounded-xl px-3 py-2 text-xs text-white outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-rose-400 mb-1">Disliked <span class="text-gray-500 font-normal">(auto-flags repetition)</span></label>
+            <input id="form-disliked" type="text" placeholder="Any bloat, repetition, clunky controls?" class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-rose-500 rounded-xl px-3 py-2 text-xs text-white outline-none" />
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex-1">
+            <label class="block text-xs font-medium text-gray-300 mb-1">Notes</label>
+            <input id="form-notes" type="text" placeholder="Runtime, play order, or verdict..." class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-xl px-3 py-2 text-xs text-white outline-none" />
+          </div>
+          <label class="inline-flex items-center gap-2 cursor-pointer pt-4 sm:pt-5 select-none">
+            <input id="form-quickwin" type="checkbox" class="w-4 h-4 rounded bg-[#0B0E14] border-[#1F2937] text-amber-500 focus:ring-0" />
+            <span class="text-xs font-medium text-amber-300">Quick-Win Queue</span>
+          </label>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="pt-3 border-t border-[#1F2937] flex items-center justify-between">
+          <button type="button" id="btn-delete-game" onclick="deleteCurrentGame()" class="hidden px-3.5 py-2 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-500/10 border border-rose-500/20 transition-colors">
+            Delete Entry
+          </button>
+          <div class="flex items-center gap-2.5 ml-auto">
+            <button type="button" onclick="closeGameModal()" class="px-4 py-2 rounded-xl text-xs font-medium text-gray-300 hover:text-white bg-[#1F2937]/60 hover:bg-[#1F2937]">Cancel</button>
+            <button type="submit" class="px-5 py-2 rounded-xl text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 shadow-lg shadow-indigo-950/50">Save Game</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Reset Confirmation Modal -->
+  <div id="reset-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-sm p-4">
+    <div class="bg-[#131822] border border-[#1F2937] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+      <h3 class="text-base font-bold text-white">Reset to Default Snapshot?</h3>
+      <p class="text-xs text-gray-400 leading-relaxed">Restores the <span data-seed-count>58</span>-game snapshot built into this page and clears local edits in this browser. <strong class="text-gray-200">Your Google Sheet is not touched.</strong> If sync is connected, the next pull replaces this with the Sheet again.</p>
+      <div class="flex justify-end gap-2.5 pt-2">
+        <button onclick="closeResetConfirm()" class="px-4 py-2 rounded-xl text-xs font-medium text-gray-300 bg-[#1F2937]/60 hover:bg-[#1F2937]">Cancel</button>
+        <button onclick="confirmResetData()" class="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-rose-600 hover:bg-rose-500">Restore Snapshot</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- SHEET SYNC SETTINGS + GUIDED SETUP         -->
+  <!-- ========================================== -->
+  <div id="settings-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-sm p-4 overflow-y-auto">
+    <div class="bg-[#131822] border border-[#1F2937] rounded-2xl max-w-xl w-full shadow-2xl overflow-hidden my-auto">
+      <div class="px-6 py-4 border-b border-[#1F2937] flex items-center justify-between bg-[#0B0E14]/50">
+        <div>
+          <h3 class="text-base font-bold text-white">Google Sheet Sync</h3>
+          <p class="text-xs text-gray-400 mt-0.5">Every add, edit and delete is written to your Library tab</p>
+        </div>
+        <button onclick="closeSettings()" class="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-[#1F2937]">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-5 max-h-[80vh] overflow-y-auto">
+        <!-- Live status -->
+        <div id="settings-status" class="p-3 rounded-xl bg-[#0B0E14] border border-[#1F2937] text-xs text-gray-300 flex items-center gap-2.5">
+          <span id="settings-status-dot" class="w-2 h-2 rounded-full bg-gray-500 shrink-0"></span>
+          <span id="settings-status-text">Not connected: changes are saved in this browser only.</span>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="space-y-2">
+          <div class="flex items-center gap-2"><span class="font-mono text-[11px] w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center">1</span><span class="text-sm font-semibold text-white">Secret token</span></div>
+          <p class="text-xs text-gray-400 pl-7">A password that stops strangers reading or writing your sheet if they find the URL. Generated once and kept in this browser, never in the page's code.</p>
+          <div class="flex gap-2 pl-7">
+            <input id="set-token" type="text" spellcheck="false" placeholder="Click Generate" class="flex-1 min-w-0 bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-lg px-3 py-1.5 text-[11px] font-mono text-cyan-300 outline-none" />
+            <button onclick="generateToken()" class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-200 bg-[#1F2937] hover:bg-gray-700">Generate</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="space-y-2">
+          <div class="flex items-center gap-2"><span class="font-mono text-[11px] w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center">2</span><span class="text-sm font-semibold text-white">Install the script in your Sheet</span></div>
+          <ol class="text-xs text-gray-400 pl-7 space-y-1 list-decimal list-inside">
+            <li>Click <strong class="text-gray-200">Copy Code.gs</strong>; your token is already inside.</li>
+            <li>Open the Game Logger sheet → <strong class="text-gray-200">Extensions → Apps Script</strong>.</li>
+            <li>Select everything in <code class="font-mono text-gray-300">Code.gs</code>, paste over it, press <strong class="text-gray-200">Ctrl+S</strong>.</li>
+          </ol>
+          <div class="pl-7">
+            <button onclick="copyCodeGs()" class="px-3.5 py-2 rounded-lg text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500">Copy Code.gs</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="space-y-2">
+          <div class="flex items-center gap-2"><span class="font-mono text-[11px] w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center">3</span><span class="text-sm font-semibold text-white">Deploy it as a Web app</span></div>
+          <ol class="text-xs text-gray-400 pl-7 space-y-1 list-decimal list-inside">
+            <li><strong class="text-gray-200">Deploy → New deployment</strong> → gear icon → <strong class="text-gray-200">Web app</strong>.</li>
+            <li>Execute as: <strong class="text-gray-200">Me</strong> · Who has access: <strong class="text-gray-200">Anyone</strong>.</li>
+            <li>Deploy → Authorize → pick your account → <em>Advanced → Go to project (unsafe)</em> → Allow. (It's your own script; Google warns on all unverified ones.)</li>
+            <li>Copy the <strong class="text-gray-200">Web app URL</strong> (ends in <code class="font-mono text-gray-300">/exec</code>).</li>
+          </ol>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="space-y-2">
+          <div class="flex items-center gap-2"><span class="font-mono text-[11px] w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center">4</span><span class="text-sm font-semibold text-white">Connect</span></div>
+          <div class="pl-7 space-y-2">
+            <input id="set-url" type="url" spellcheck="false" placeholder="https://script.google.com/macros/s/…/exec" class="w-full bg-[#0B0E14] border border-[#1F2937] focus:border-indigo-500 rounded-lg px-3 py-1.5 text-[11px] font-mono text-gray-200 outline-none" />
+            <div class="flex flex-wrap items-center gap-2">
+              <button id="btn-connect" onclick="testAndConnect()" class="px-3.5 py-2 rounded-lg text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-500">Test &amp; Connect</button>
+              <span id="connect-result" class="text-xs text-gray-400"></span>
+            </div>
+            <p class="text-[11px] text-gray-500">Connecting replaces this browser's copy with what's in the Sheet. The Sheet is the master copy.</p>
+          </div>
+        </div>
+
+        <!-- Other devices + disconnect -->
+        <div id="settings-connected-tools" class="hidden pt-4 border-t border-[#1F2937] space-y-3">
+          <div>
+            <div class="text-sm font-semibold text-white">Add your phone / another PC</div>
+            <p class="text-xs text-gray-400 mt-0.5">Copies a one-time link that connects another device instantly. It contains your token, so only send it to yourself (e.g. Saved Messages / notes).</p>
+            <button onclick="copyDeviceLink()" class="mt-2 px-3.5 py-2 rounded-lg text-xs font-semibold text-gray-100 bg-[#1F2937] hover:bg-gray-700">Copy device link</button>
+          </div>
+          <div class="flex items-center justify-between">
+            <p class="text-[11px] text-gray-500">Changed Code.gs later? Deploy → Manage deployments → ✎ Edit → Version: New version. The URL stays the same.</p>
+            <button onclick="disconnectSync()" class="shrink-0 ml-3 px-3 py-1.5 rounded-lg text-xs font-medium text-rose-400 hover:bg-rose-500/10 border border-rose-500/20">Disconnect</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Apps Script source, copied by the Settings modal with the token injected -->
+  <script type="text/plain" id="codegs-template">/**
+ * GAME LOGGER · Sheet Sync API (Google Apps Script)
+ * Paste into: Game Logger sheet → Extensions → Apps Script → Code.gs
+ *
+ * Safety rules baked in:
+ *  - Columns are matched by HEADER NAME, not position (reorder freely).
+ *  - Formula columns (Cover, Sub Avg, Flag) are NEVER written, so the
+ *    header-row array formulas keep spilling.
+ *  - New games go into the first row after the last Title (stays inside
+ *    the formula range), never appendRow().
+ *  - Games are matched by Title, so sorting/filtering the sheet is safe.
+ *  - Every request (read or write) needs the token.
+ */
+
+const SHEET_NAME = 'Library';
+const SECRET_TOKEN = '__TOKEN__'; // must match the token saved in the app's Settings
+const FORMULA_COLUMNS = ['Cover', 'Sub Avg', 'Flag'];
+const NUMBER_COLUMNS = ['Rating', 'Story', 'Graphics', 'Gameplay'];
+const DATE_COLUMNS = ['Finished'];
+const DATE_FORMAT = 'd MMM yyyy';
+
+// Health check: open the Web App URL in a browser, you should see {"status":"ok"...}
+function doGet() {
+  return json_({ status: 'ok', app: 'game-logger', note: 'Use POST with a token to read/write.' });
+}
+
+function doPost(e) {
+  let payload;
+  try {
+    payload = JSON.parse((e && e.postData && e.postData.contents) || '{}');
+  } catch (err) {
+    return json_({ status: 'error', message: 'Bad JSON' });
+  }
+  if (!payload.token || payload.token !== SECRET_TOKEN) {
+    return json_({ status: 'error', message: 'Unauthorized' });
+  }
+
+  const lock = LockService.getScriptLock();
+  try {
+    lock.waitLock(20000);
+    const ctx = context_();
+    switch (payload.action) {
+      case 'list':   return json_({ status: 'ok', games: list_(ctx) });
+      case 'upsert': return json_(upsert_(ctx, payload.matchTitle, payload.game || {}));
+      case 'delete': return json_(remove_(ctx, payload.matchTitle));
+      default:       return json_({ status: 'error', message: 'Unknown action' });
+    }
+  } catch (err) {
+    return json_({ status: 'error', message: String(err && err.message || err) });
+  } finally {
+    try { lock.releaseLock(); } catch (_) {}
+  }
+}
+
+// ---------------------------------------------------------------------------
+
+function context_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) throw new Error('Sheet "' + SHEET_NAME + '" not found');
+  const lastCol = sheet.getLastColumn();
+  const headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0].map(h => String(h).trim());
+  const col = {};
+  headers.forEach((h, i) => { if (h) col[h] = i + 1; });
+  if (!col['Title']) throw new Error('No "Title" header found in row 1');
+  return { ss, sheet, headers, col, tz: ss.getSpreadsheetTimeZone() };
+}
+
+function norm_(s) { return String(s == null ? '' : s).trim().toLowerCase(); }
+
+// Last row that actually has a Title (ignores formula spill rows).
+function lastTitleRow_(ctx) {
+  const max = ctx.sheet.getMaxRows();
+  if (max < 2) return 1;
+  const titles = ctx.sheet.getRange(2, ctx.col['Title'], max - 1, 1).getValues();
+  for (let i = titles.length - 1; i >= 0; i--) {
+    if (String(titles[i][0]).trim() !== '') return i + 2;
+  }
+  return 1;
+}
+
+function findRow_(ctx, title) {
+  const key = norm_(title);
+  if (!key) return -1;
+  const last = lastTitleRow_(ctx);
+  if (last < 2) return -1;
+  const titles = ctx.sheet.getRange(2, ctx.col['Title'], last - 1, 1).getValues();
+  for (let i = 0; i < titles.length; i++) {
+    if (norm_(titles[i][0]) === key) return i + 2;
+  }
+  return -1;
+}
+
+function list_(ctx) {
+  const last = lastTitleRow_(ctx);
+  if (last < 2) return [];
+  const values = ctx.sheet.getRange(2, 1, last - 1, ctx.headers.length).getValues();
+  return values
+    .filter(row => String(row[ctx.col['Title'] - 1]).trim() !== '')
+    .map(row => {
+      const obj = {};
+      ctx.headers.forEach((h, i) => {
+        if (!h || h === 'Cover') return;
+        let v = row[i];
+        if (Object.prototype.toString.call(v) === '[object Date]') v = Utilities.formatDate(v, ctx.tz, DATE_FORMAT);
+        obj[h] = v;
+      });
+      obj['Title'] = String(obj['Title']).trim();
+      return obj;
+    });
+}
+
+function toCellValue_(header, raw, tz) {
+  if (raw === null || raw === undefined) return '';
+  if (NUMBER_COLUMNS.indexOf(header) !== -1) {
+    if (raw === '') return '';
+    const n = Number(raw);
+    return isNaN(n) ? '' : n;
+  }
+  if (DATE_COLUMNS.indexOf(header) !== -1) {
+    const s = String(raw).trim();
+    if (!s) return '';
+    let d = null;
+    try { d = Utilities.parseDate(s, tz, DATE_FORMAT); } catch (_) { d = null; }
+    if (!d || isNaN(d.getTime())) d = new Date(s);
+    return isNaN(d.getTime()) ? s : d; // real date if parseable, else keep text
+  }
+  return String(raw);
+}
+
+function upsert_(ctx, matchTitle, game) {
+  const title = String(game['Title'] || '').trim();
+  if (!title) return { status: 'error', message: 'Title is required' };
+
+  let row = findRow_(ctx, matchTitle || title);
+  let created = false;
+
+  // Renaming onto another existing game would silently merge two rows: refuse.
+  if (row !== -1 && norm_(matchTitle) && norm_(matchTitle) !== norm_(title)) {
+    const clash = findRow_(ctx, title);
+    if (clash !== -1 && clash !== row) return { status: 'error', message: 'A game titled "' + title + '" already exists' };
+  }
+
+  if (row === -1) {
+    row = lastTitleRow_(ctx) + 1;
+    if (row > ctx.sheet.getMaxRows()) ctx.sheet.insertRowsAfter(ctx.sheet.getMaxRows(), 1);
+    created = true;
+  }
+
+  // Write each editable column individually (formula columns untouched).
+  Object.keys(ctx.col).forEach(header => {
+    if (FORMULA_COLUMNS.indexOf(header) !== -1) return;
+    if (!Object.prototype.hasOwnProperty.call(game, header)) return;
+    ctx.sheet.getRange(row, ctx.col[header]).setValue(toCellValue_(header, game[header], ctx.tz));
+  });
+
+  return { status: 'ok', row: row, created: created };
+}
+
+function remove_(ctx, matchTitle) {
+  const row = findRow_(ctx, matchTitle);
+  if (row === -1) return { status: 'ok', row: -1, note: 'Not found (already deleted?)' };
+  ctx.sheet.deleteRow(row);
+  return { status: 'ok', row: row, deleted: true };
+}
+
+function json_(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+</script>
+
+  <script>
+    // =========================================================================
+    // 1. TAXONOMY & PRELOADED 46-GAME DATASET (AHMED'S GAME LOGGER)
+    // =========================================================================
+    const GENRES = [
+      'FPS',
+      'Third-Person Shooter',
+      'Action-Adventure',
+      'Action RPG',
+      'RPG',
+      'Stealth / Immersive Sim',
+      'Platformer',
+      'Racing',
+      'Horror',
+      'Strategy'
+    ];
+
+    const CORE_HOOKS = [
+      'Power Fantasy',
+      'Atmosphere / World',
+      'Tactical Sandbox',
+      'Pure Story',
+      'Adrenaline / Gunplay'
+    ];
+
+    const STATUSES = ['Completed', 'Playing', 'Parked', 'Dropped', 'Backlog', 'Wishlist'];
+
+    const STATUS_STYLES = {
+      Completed: { pill: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30', bar: 'bg-emerald-500', dot: 'bg-emerald-400' },
+      Playing:   { pill: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30',   bar: 'bg-indigo-500',  dot: 'bg-indigo-400' },
+      Parked:    { pill: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30',         bar: 'bg-cyan-500',    dot: 'bg-cyan-400' },
+      Dropped:   { pill: 'bg-rose-500/15 text-rose-300 border-rose-500/30',         bar: 'bg-rose-500',    dot: 'bg-rose-400' },
+      Backlog:   { pill: 'bg-amber-500/15 text-amber-300 border-amber-500/30',      bar: 'bg-amber-500',   dot: 'bg-amber-400' },
+      Wishlist:  { pill: 'bg-purple-500/15 text-purple-300 border-purple-500/30',   bar: 'bg-purple-500',  dot: 'bg-purple-400' },
+    };
+
+    const STEAM_CDN = (appId) => appId ? `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/header.jpg` : '';
+
+    // Snapshot of the Library tab (used offline / before the Sheet is connected).
+    // Shape matches the Sheet headers exactly; mapped to app objects below.
+    const SEED_ROWS = [{"Title":"Doom (2016)","Status":"Completed","Rating":9,"Story":7,"Graphics":9,"Gameplay":9,"Replay":"Maybe","Genre":"FPS","World":"Linear","Franchise":"Doom","Platform":"PC","Length":"Medium","Core Hook":"Adrenaline / Gunplay","Finished":"3 Jan 2025","Loved":"Guns, movement","Disliked":"Repetitive towards the end","Notes":"Epic boss fights!","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/379720/header.jpg"},{"Title":"Cyberpunk 2077","Status":"Completed","Rating":10,"Story":8,"Graphics":10,"Gameplay":9,"Replay":"Yes","Genre":"Action RPG","World":"Open","Franchise":"Cyberpunk","Platform":"PC","Length":"Massive","Core Hook":"Power Fantasy","Finished":"","Loved":"Customization, open world, mods","Disliked":"Cruelty","Notes":"Insane graphics","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg"},{"Title":"Ratchet & Clank: Rift Apart","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"No","Genre":"Platformer","World":"Linear","Franchise":"Ratchet & Clank","Platform":"PC","Length":"Medium","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"Great graphics","Disliked":"","Notes":"[Quick-Win #11] ~10–11 hrs","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1895880/header.jpg"},{"Title":"God of War (2018)","Status":"Parked","Rating":"","Story":7,"Graphics":8,"Gameplay":8,"Replay":"No","Genre":"Action-Adventure","World":"Semi-open","Franchise":"God of War","Platform":"PC","Length":"Long","Core Hook":"Pure Story","Finished":"","Loved":"Hack & slash","Disliked":"Clunky controls","Notes":"Confusing in just about everything","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg"},{"Title":"Far Cry Primal","Status":"Parked","Rating":7,"Story":7,"Graphics":8,"Gameplay":8,"Replay":"Maybe","Genre":"FPS","World":"Open","Franchise":"Far Cry","Platform":"PC","Length":"Long","Core Hook":"Atmosphere / World","Finished":"","Loved":"Riding dinosaurs","Disliked":"Too many fetch missions","Notes":"Same formula as FC3 and FC4","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/371660/header.jpg"},{"Title":"Watch Dogs 2","Status":"Parked","Rating":7,"Story":6,"Graphics":8,"Gameplay":8,"Replay":"No","Genre":"Action-Adventure","World":"Open","Franchise":"Watch Dogs","Platform":"PC","Length":"Long","Core Hook":"Tactical Sandbox","Finished":"","Loved":"RC & drone","Disliked":"Repetitive missions","Notes":"Better than 1 I'd say","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/447040/header.jpg"},{"Title":"BioShock","Status":"Completed","Rating":9,"Story":10,"Graphics":8,"Gameplay":9,"Replay":"Maybe","Genre":"FPS","World":"Linear","Franchise":"BioShock","Platform":"PC","Length":"Medium","Core Hook":"Pure Story","Finished":"","Loved":"Gunplay","Disliked":"Hard choices","Notes":"A masterpiece","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/409710/header.jpg"},{"Title":"BioShock Infinite","Status":"Parked","Rating":7,"Story":5,"Graphics":9,"Gameplay":8,"Replay":"No","Genre":"FPS","World":"Linear","Franchise":"BioShock","Platform":"PC","Length":"Medium","Core Hook":"Pure Story","Finished":"","Loved":"Elizabeth","Disliked":"Repetitive and boring","Notes":"Coulda been better","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/8870/header.jpg"},{"Title":"Fallout 4","Status":"Completed","Rating":8,"Story":7,"Graphics":8,"Gameplay":9,"Replay":"Maybe","Genre":"Action RPG","World":"Open","Franchise":"Fallout","Platform":"PC","Length":"Massive","Core Hook":"Atmosphere / World","Finished":"","Loved":"Pip-Boy","Disliked":"Too repetitive","Notes":"Lots of customization","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/377160/header.jpg"},{"Title":"Far Cry 4","Status":"Completed","Rating":8,"Story":8,"Graphics":9,"Gameplay":9,"Replay":"Yes","Genre":"FPS","World":"Open","Franchise":"Far Cry","Platform":"PC","Length":"Long","Core Hook":"Tactical Sandbox","Finished":"","Loved":"Outpost liberation","Disliked":"Expected ending","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/298110/header.jpg"},{"Title":"Far Cry 3","Status":"Completed","Rating":10,"Story":9,"Graphics":9,"Gameplay":8,"Replay":"Yes","Genre":"FPS","World":"Open","Franchise":"Far Cry","Platform":"PC","Length":"Medium","Core Hook":"Power Fantasy","Finished":"","Loved":"Citra, Bun Dem","Disliked":"MC too powerless","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/220240/header.jpg"},{"Title":"Marvel's Spider-Man Remastered","Status":"Completed","Rating":10,"Story":9,"Graphics":10,"Gameplay":9,"Replay":"No","Genre":"Action-Adventure","World":"Open","Franchise":"Spider-Man","Platform":"PC","Length":"Medium","Core Hook":"Power Fantasy","Finished":"14 Nov 2025","Loved":"Swinging / traversal","Disliked":"A bit repetitive","Notes":"Nice suits!","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg"},{"Title":"Marvel's Guardians of the Galaxy","Status":"Dropped","Rating":6,"Story":7,"Graphics":9,"Gameplay":5,"Replay":"No","Genre":"Action-Adventure","World":"Linear","Franchise":"Guardians of the Galaxy","Platform":"PC","Length":"Medium","Core Hook":"Pure Story","Finished":"","Loved":"Graphics","Disliked":"Too long and repetitive","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1088850/header.jpg"},{"Title":"The Crew 2","Status":"Dropped","Rating":7,"Story":4,"Graphics":8,"Gameplay":8,"Replay":"No","Genre":"Racing","World":"Open","Franchise":"The Crew","Platform":"PC","Length":"Massive","Core Hook":"Atmosphere / World","Finished":"","Loved":"Open world","Disliked":"Bloat","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/646910/header.jpg"},{"Title":"Mad Max","Status":"Completed","Rating":9,"Story":7,"Graphics":8,"Gameplay":9,"Replay":"Maybe","Genre":"Action-Adventure","World":"Open","Franchise":"Mad Max","Platform":"PC","Length":"Long","Core Hook":"Atmosphere / World","Finished":"","Loved":"Optimization, driving around","Disliked":"A bit empty","Notes":"Mad Max done right","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/234140/header.jpg"},{"Title":"Mafia: Definitive Edition","Status":"Completed","Rating":8,"Story":9,"Graphics":8,"Gameplay":6,"Replay":"No","Genre":"Action-Adventure","World":"Linear","Franchise":"Mafia","Platform":"PC","Length":"Medium","Core Hook":"Pure Story","Finished":"30 Mar 2026","Loved":"Graphics are nice","Disliked":"Controls are wonky","Notes":"Cool story","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1030840/header.jpg"},{"Title":"Crimson Desert","Status":"Completed","Rating":9,"Story":7,"Graphics":10,"Gameplay":9,"Replay":"Yes","Genre":"Action-Adventure","World":"Open","Franchise":"Crimson Desert","Platform":"PC","Length":"Massive","Core Hook":"Power Fantasy","Finished":"20 Apr 2026","Loved":"So much freedom","Disliked":"Controls feel a bit laggy","Notes":"Lots of stuff to do","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/3321460/header.jpg"},{"Title":"Ghost of Tsushima","Status":"Playing","Rating":9,"Story":8,"Graphics":8,"Gameplay":8,"Replay":"No","Genre":"Action-Adventure","World":"Open","Franchise":"Ghost of Tsushima","Platform":"PC","Length":"Long","Core Hook":"Atmosphere / World","Finished":"","Loved":"Amazing scenery and visuals","Disliked":"Honestly a bit repetitive but it's fine, also disliked how it doesn't evolve much, just change stance to win","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/2215430/header.jpg"},{"Title":"Dragon Age™ Inquisition","Status":"Completed","Rating":9,"Story":8,"Graphics":9,"Gameplay":9,"Replay":"Yes","Genre":"RPG","World":"Open","Franchise":"Dragon Age","Platform":"PC","Length":"Massive","Core Hook":"Pure Story","Finished":"","Loved":"Absolutely replayed it 4-5 times completely, world building is on a whole other level. Companions are all amazing.","Disliked":"Absolutely repetitive","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1222690/header.jpg"},{"Title":"The Elder Scrolls V: Skyrim","Status":"Parked","Rating":8,"Story":8,"Graphics":7,"Gameplay":7,"Replay":"Yes","Genre":"Action RPG","World":"Open","Franchise":"The Elder Scrolls","Platform":"PC","Length":"Massive","Core Hook":"Atmosphere / World","Finished":"","Loved":"","Disliked":"","Notes":"Massive sandbox — parked, not disliked","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/489830/header.jpg"},{"Title":"Battlefield 3","Status":"Completed","Rating":9,"Story":7,"Graphics":9,"Gameplay":9,"Replay":"Yes","Genre":"FPS","World":"Linear","Franchise":"Battlefield","Platform":"PC","Length":"Short","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1238820/header.jpg"},{"Title":"Battlefield 4","Status":"Completed","Rating":9,"Story":6,"Graphics":9,"Gameplay":8,"Replay":"Yes","Genre":"FPS","World":"Linear","Franchise":"Battlefield","Platform":"PC","Length":"Short","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1238860/header.jpg"},{"Title":"Dishonored","Status":"Completed","Rating":10,"Story":9,"Graphics":8,"Gameplay":9,"Replay":"Yes","Genre":"Stealth / Immersive Sim","World":"Semi-open","Franchise":"Dishonored","Platform":"PC","Length":"Medium","Core Hook":"Tactical Sandbox","Finished":"","Loved":"","Disliked":"","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/205100/header.jpg"},{"Title":"Prey","Status":"Completed","Rating":8,"Story":7,"Graphics":8,"Gameplay":8,"Replay":"Yes","Genre":"Stealth / Immersive Sim","World":"Semi-open","Franchise":"Prey","Platform":"PC","Length":"Long","Core Hook":"Tactical Sandbox","Finished":"","Loved":"","Disliked":"","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/480490/header.jpg"},{"Title":"Call of Duty 4: Modern Warfare","Status":"Completed","Rating":8,"Story":7,"Graphics":7,"Gameplay":7,"Replay":"Maybe","Genre":"FPS","World":"Linear","Franchise":"Call of Duty","Platform":"PC","Length":"Short","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/7940/header.jpg"},{"Title":"Call of Duty: Modern Warfare 2","Status":"Completed","Rating":8,"Story":7,"Graphics":6,"Gameplay":6,"Replay":"Yes","Genre":"FPS","World":"Linear","Franchise":"Call of Duty","Platform":"PC","Length":"Short","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/10180/header.jpg"},{"Title":"Call of Duty: Black Ops","Status":"Completed","Rating":7,"Story":7,"Graphics":6,"Gameplay":7,"Replay":"Yes","Genre":"FPS","World":"Linear","Franchise":"Call of Duty","Platform":"PC","Length":"Short","Core Hook":"Pure Story","Finished":"","Loved":"","Disliked":"","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/42700/header.jpg"},{"Title":"Call of Duty: Modern Warfare 3","Status":"Completed","Rating":9,"Story":8,"Graphics":8,"Gameplay":8,"Replay":"Yes","Genre":"FPS","World":"Linear","Franchise":"Call of Duty","Platform":"PC","Length":"Short","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/42680/header.jpg"},{"Title":"Call of Duty: Black Ops II","Status":"Completed","Rating":7,"Story":7,"Graphics":7,"Gameplay":7,"Replay":"Yes","Genre":"FPS","World":"Linear","Franchise":"Call of Duty","Platform":"PC","Length":"Short","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/202970/header.jpg"},{"Title":"The Witcher 3: Wild Hunt","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action RPG","World":"Open","Franchise":"The Witcher","Platform":"PC","Length":"Massive","Core Hook":"Pure Story","Finished":"","Loved":"","Disliked":"","Notes":"Remastered v5.00b/c — #1 overall pick","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg"},{"Title":"Horizon Zero Dawn Remastered","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action RPG","World":"Open","Franchise":"Horizon","Platform":"PC","Length":"Long","Core Hook":"Atmosphere / World","Finished":"","Loved":"","Disliked":"","Notes":"","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/2561580/header.jpg"},{"Title":"Days Gone","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action-Adventure","World":"Open","Franchise":"Days Gone","Platform":"PC","Length":"Long","Core Hook":"Atmosphere / World","Finished":"","Loved":"","Disliked":"","Notes":"Mad Max successor","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1259420/header.jpg"},{"Title":"Titanfall 2","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"FPS","World":"Linear","Franchise":"Titanfall","Platform":"PC","Length":"Short","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"[Quick-Win #1] 6–7 hrs — First up after Tsushima","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1237970/header.jpg"},{"Title":"Devil May Cry 5","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action-Adventure","World":"Linear","Franchise":"Devil May Cry","Platform":"PC","Length":"Short","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"[Quick-Win #5] ~10–12 hrs — stylish action, zero open-world bloat","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/601150/header.jpg"},{"Title":"Marvel's Spider-Man: Miles Morales","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action-Adventure","World":"Open","Franchise":"Spider-Man","Platform":"PC","Length":"Short","Core Hook":"Power Fantasy","Finished":"","Loved":"","Disliked":"","Notes":"[Quick-Win #7] 8–12 hrs","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1817190/header.jpg"},{"Title":"Resident Evil 2","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Horror","World":"Semi-open","Franchise":"Resident Evil","Platform":"PC","Length":"Short","Core Hook":"Atmosphere / World","Finished":"","Loved":"","Disliked":"","Notes":"[Quick-Win #4] 8–10 hrs","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/883710/header.jpg"},{"Title":"Wolfenstein: The New Order","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"FPS","World":"Linear","Franchise":"Wolfenstein","Platform":"PC","Length":"Short","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"[Quick-Win #10] 11–12 hrs","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/201810/header.jpg"},{"Title":"Dishonored 2","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Stealth / Immersive Sim","World":"Semi-open","Franchise":"Dishonored","Platform":"PC","Length":"Medium","Core Hook":"Tactical Sandbox","Finished":"","Loved":"","Disliked":"","Notes":"[Quick-Win #6] 12–15 hrs","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/403640/header.jpg"},{"Title":"Batman: Arkham Knight","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action-Adventure","World":"Open","Franchise":"Batman: Arkham","Platform":"PC","Length":"Long","Core Hook":"Power Fantasy","Finished":"","Loved":"","Disliked":"","Notes":"25–35 hrs — Best mid-length open-world pick","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/208650/header.jpg"},{"Title":"Onimusha: Way of the Sword","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action-Adventure","World":"Linear","Franchise":"Onimusha","Platform":"PC","Length":"Medium","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"2026 release","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/2638890/header.jpg"},{"Title":"Phantom Blade Zero","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action RPG","World":"Semi-open","Franchise":"Phantom Blade","Platform":"PC","Length":"Medium","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"Wuxia fast-paced action","Cover URL":"https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4115450/7f882f889630270d3d3fb93825ac6f55b55e7a6c/header.jpg"},{"Title":"Warhammer 40,000: Space Marine 2","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Third-Person Shooter","World":"Linear","Franchise":"Warhammer 40,000","Platform":"PC","Length":"Short","Core Hook":"Power Fantasy","Finished":"","Loved":"","Disliked":"","Notes":"[Quick-Win #3] 8–10 hrs — campaign only, skip PvE grind","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/2183900/header.jpg"},{"Title":"HITMAN 3","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Stealth / Immersive Sim","World":"Semi-open","Franchise":"Hitman","Platform":"PC","Length":"Medium","Core Hook":"Tactical Sandbox","Finished":"","Loved":"","Disliked":"","Notes":"World of Assassination — includes Hitman 1 & 2 campaigns","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1659040/header.jpg"},{"Title":"METAL EDEN","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"FPS","World":"Linear","Franchise":"Metal Eden","Platform":"PC","Length":"Short","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"[Quick-Win #8] Cybernetic movement FPS, zero filler","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/990380/header.jpg"},{"Title":"Detroit: Become Human","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action-Adventure","World":"Linear","Franchise":"Detroit: Become Human","Platform":"PC","Length":"Short","Core Hook":"Pure Story","Finished":"","Loved":"","Disliked":"","Notes":"[Quick-Win #2] 10–12 hrs — branching narrative thriller","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1222140/header.jpg"},{"Title":"Still Wakes the Deep","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Horror","World":"Linear","Franchise":"Still Wakes the Deep","Platform":"PC","Length":"Short","Core Hook":"Atmosphere / World","Finished":"","Loved":"","Disliked":"","Notes":"[Quick-Win #9] 4–6 hrs — weekend oil-rig horror thriller","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1622910/header.jpg"},{"Title":"Black Myth: Wukong","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action RPG","World":"Semi-open","Franchise":"Black Myth","Platform":"PC","Length":"Long","Core Hook":"Power Fantasy","Finished":"","Loved":"","Disliked":"","Notes":"Boss-rush spectacle, zero open-world map bloat","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/2358720/header.jpg"},{"Title":"Shadow Warrior 3","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"FPS","World":"Linear","Franchise":"Shadow Warrior","Platform":"PC","Length":"Short","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"[Quick-Win Queue] 5–6 hrs — pure Doom-style kinetic shooter","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1036890/header.jpg"},{"Title":"Prince of Persia: The Lost Crown","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Platformer","World":"Semi-open","Franchise":"Prince of Persia","Platform":"PC","Length":"Medium","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"Tight combat & platforming with memory-shard map pins","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/2751000/header.jpg"},{"Title":"DEATHLOOP","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"FPS","World":"Semi-open","Franchise":"Deathloop","Platform":"PC","Length":"Medium","Core Hook":"Tactical Sandbox","Finished":"","Loved":"","Disliked":"","Notes":"Arkane time-loop assassination puzzle","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1252330/header.jpg"},{"Title":"Luna Abyss","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"FPS","World":"Linear","Franchise":"Luna Abyss","Platform":"PC","Length":"Short","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"[Quick-Win Queue] 6–8 hrs — brutalist sci-fi bullet-hell FPS","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1933000/header.jpg"},{"Title":"Valor Mortis","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action RPG","World":"Semi-open","Franchise":"Valor Mortis","Platform":"PC","Length":"Medium","Core Hook":"Adrenaline / Gunplay","Finished":"","Loved":"","Disliked":"","Notes":"First-person Napoleonic soulslike from Ghostrunner devs","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/2828710/header.jpg"},{"Title":"Atomic Heart","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"FPS","World":"Semi-open","Franchise":"Atomic Heart","Platform":"PC","Length":"Medium","Core Hook":"Atmosphere / World","Finished":"","Loved":"","Disliked":"","Notes":"Main-path facilities, drive straight through open hubs","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/668580/header.jpg"},{"Title":"Middle-Earth: Shadow of Mordor","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action-Adventure","World":"Open","Franchise":"Middle-earth","Platform":"PC","Length":"Medium","Core Hook":"Power Fantasy","Finished":"","Loved":"","Disliked":"","Notes":"Stick to main quests & Nemesis System captains","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/241930/header.jpg"},{"Title":"Ghostwire: Tokyo","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action-Adventure","World":"Open","Franchise":"Ghostwire","Platform":"PC","Length":"Medium","Core Hook":"Atmosphere / World","Finished":"","Loved":"","Disliked":"","Notes":"11–12 hrs mainline story — skip spirit/collectible bloat","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1475810/header.jpg"},{"Title":"The Outer Worlds 2","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action RPG","World":"Semi-open","Franchise":"The Outer Worlds","Platform":"PC","Length":"Long","Core Hook":"Pure Story","Finished":"","Loved":"","Disliked":"","Notes":"Obsidian sci-fi RPG — focus on main & companion quests","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1449110/header.jpg"},{"Title":"CarX Street","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Racing","World":"Open","Franchise":"CarX","Platform":"PC","Length":"Long","Core Hook":"Atmosphere / World","Finished":"","Loved":"","Disliked":"","Notes":"Casual hop-in drift/tuning toy (park when done, avoid grind)","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/1114150/header.jpg"},{"Title":"Whirlight - No Time To Trip","Status":"Backlog","Rating":"","Story":"","Graphics":"","Gameplay":"","Replay":"","Genre":"Action-Adventure","World":"Linear","Franchise":"Whirlight","Platform":"PC","Length":"Short","Core Hook":"Pure Story","Finished":"","Loved":"","Disliked":"","Notes":"~15 hrs — witty time-travel graphic adventure","Cover URL":"https://cdn.cloudflare.steamstatic.com/steam/apps/2706980/header.jpg"}];
+
+    const toNum = (v) => {
+      if (v === null || v === undefined || v === '') return null;
+      const n = Number(v);
+      return isNaN(n) ? null : n;
+    };
+    const appIdFromUrl = (u) => { const m = String(u || '').match(/\/apps\/(\d+)/); return m ? m[1] : ''; };
+
+    // Sheet row (header-keyed) -> app game object
+    function fromSheet(r, i) {
+      const coverUrl = String(r['Cover URL'] || '').trim();
+      return {
+        id: i + 1,
+        title: String(r['Title'] || '').trim(),
+        status: String(r['Status'] || 'Backlog').trim(),
+        overall: toNum(r['Rating']),
+        story: toNum(r['Story']),
+        graphics: toNum(r['Graphics']),
+        gameplay: toNum(r['Gameplay']),
+        replay: String(r['Replay'] || ''),
+        genre: String(r['Genre'] || ''),
+        world: String(r['World'] || ''),
+        franchise: String(r['Franchise'] || ''),
+        platform: String(r['Platform'] || 'PC'),
+        length: String(r['Length'] || ''),
+        coreHook: String(r['Core Hook'] || ''),
+        finished: String(r['Finished'] || ''),
+        loved: String(r['Loved'] || ''),
+        disliked: String(r['Disliked'] || ''),
+        notes: String(r['Notes'] || ''),
+        appId: appIdFromUrl(coverUrl),
+        coverUrl
+      };
+    }
+
+    // App game object -> Sheet row (only editable columns; formula columns are left to the Sheet)
+    function toSheet(g) {
+      const n = (v) => (typeof v === 'number' && !isNaN(v)) ? v : '';
+      return {
+        'Title': g.title, 'Status': g.status, 'Rating': n(g.overall),
+        'Story': n(g.story), 'Graphics': n(g.graphics), 'Gameplay': n(g.gameplay),
+        'Replay': g.replay || '', 'Genre': g.genre || '', 'World': g.world || '',
+        'Franchise': g.franchise || '', 'Platform': g.platform || 'PC', 'Length': g.length || '',
+        'Core Hook': g.coreHook || '', 'Finished': g.finished || '', 'Loved': g.loved || '',
+        'Disliked': g.disliked || '', 'Notes': g.notes || '', 'Cover URL': g.coverUrl || ''
+      };
+    }
+
+    const DEFAULT_GAMES = SEED_ROWS.map(fromSheet);
+
+    // Escape user/Sheet text before it goes into innerHTML
+    function esc(v) {
+      return String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    // =========================================================================
+    // 2. APPLICATION STATE & STORAGE
+    // =========================================================================
+    const STORAGE_KEY = 'ahmed_game_logger_v2'; // v2: Sheet-shaped data (old 46-game cache ignored)
+    let games = [];
+    let currentView = 'dashboard';
+    let libraryLayout = 'grid';
+    let activeStatusFilter = 'All';
+    let upNextMode = 'quickwin';
+
+    function loadGames() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            games = parsed;
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('Storage read failed, loading default dataset.', e);
+      }
+      games = JSON.parse(JSON.stringify(DEFAULT_GAMES));
+      saveGames();
+    }
+
+    function saveGames() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(games));
+      } catch (e) {
+        console.warn('Storage write failed.', e);
+      }
+      document.getElementById('nav-count').textContent = games.length;
+    }
+
+    // =========================================================================
+    // 3. ANALYTICS & HELPER CALCULATIONS
+    // =========================================================================
+    function calcSubAvg(g) {
+      const vals = [g.story, g.graphics, g.gameplay].filter(v => typeof v === 'number' && !isNaN(v));
+      if (vals.length === 0) return null;
+      return vals.reduce((a, b) => a + b, 0) / vals.length;
+    }
+
+    function calcVibeBonus(g) {
+      const sub = calcSubAvg(g);
+      if (sub === null || typeof g.overall !== 'number' || isNaN(g.overall)) return null;
+      return g.overall - sub;
+    }
+
+    function hasRepetitionFlag(g) {
+      const text = `${g.disliked || ''} ${g.notes || ''}`.toLowerCase();
+      // Same keywords as the Sheet's Flag formula
+      return /repetit|fetch|bloat|formula|grind/.test(text);
+    }
+
+    // Matches both "[Quick-Win #3]" and "[Quick-Win Queue]"
+    const QW_TAG_RE = /\[quick-win[^\]]*\]\s*/i;
+    function isQuickWin(g) {
+      return QW_TAG_RE.test(g.notes || '');
+    }
+    function quickWinTag(g) {
+      const m = (g.notes || '').match(/\[quick-win[^\]]*\]/i);
+      return m ? m[0] : '';
+    }
+    function quickWinRank(g) {
+      const m = (g.notes || '').match(/\[quick-win\s*#\s*(\d+)\]/i);
+      return m ? Number(m[1]) : 999;
+    }
+    function stripQwTag(notes) {
+      return String(notes || '').replace(QW_TAG_RE, '').trim();
+    }
+
+    function fmtNum(n, decimals = 1) {
+      if (n === null || n === undefined || isNaN(n)) return '—';
+      return Number.isInteger(n) ? String(n) : n.toFixed(decimals);
+    }
+
+    function mean(arr) {
+      const valid = arr.filter(v => typeof v === 'number' && !isNaN(v));
+      if (!valid.length) return null;
+      return valid.reduce((a, b) => a + b, 0) / valid.length;
+    }
+
+    // =========================================================================
+    // 4. DASHBOARD RENDERING
+    // =========================================================================
+    function renderDashboard() {
+      const total = games.length;
+      const byStatus = {};
+      STATUSES.forEach(s => byStatus[s] = []);
+      games.forEach(g => {
+        if (!byStatus[g.status]) byStatus[g.status] = [];
+        byStatus[g.status].push(g);
+      });
+
+      const completed = byStatus.Completed;
+      const dropped = byStatus.Dropped;
+      const parked = byStatus.Parked;
+      const playing = byStatus.Playing;
+      const backlog = byStatus.Backlog;
+
+      const finishDenom = completed.length + dropped.length;
+      const finishRate = finishDenom > 0 ? Math.round((completed.length / finishDenom) * 100) : 0;
+
+      const ratedGames = games.filter(g => typeof g.overall === 'number' && !isNaN(g.overall));
+      const avgOverall = mean(ratedGames.map(g => g.overall));
+      const topGame = [...ratedGames].sort((a, b) => b.overall - a.overall)[0];
+      const quickWinCount = backlog.filter(isQuickWin).length;
+
+      // 1. Top 6 KPI Cards
+      const kpis = [
+        {
+          label: 'Games Logged',
+          value: total,
+          sub: `${new Set(games.map(g => g.franchise).filter(Boolean)).size} franchises · PC`,
+          accent: 'text-white'
+        },
+        {
+          label: 'Finished',
+          value: completed.length,
+          sub: `${dropped.length} dropped · ${parked.length} parked`,
+          accent: 'text-emerald-400'
+        },
+        {
+          label: 'Finish Rate',
+          value: `${finishRate}%`,
+          sub: `${completed.length} of ${finishDenom} decisive runs`,
+          accent: 'text-cyan-400'
+        },
+        {
+          label: 'Avg Rating',
+          value: fmtNum(avgOverall, 1),
+          sub: topGame ? `Top: ${topGame.title} (${topGame.overall})` : 'No ratings yet',
+          accent: 'text-amber-400'
+        },
+        {
+          label: 'Now Playing',
+          value: playing.length,
+          sub: playing.length ? playing.map(g => g.title).join(', ') : 'Queue clear',
+          accent: 'text-indigo-400'
+        },
+        {
+          label: 'Backlog',
+          value: backlog.length,
+          sub: `${quickWinCount} in Quick-Win Queue`,
+          accent: 'text-amber-300'
+        }
+      ];
+
+      document.getElementById('kpi-grid').innerHTML = kpis.map(k => `
+        <div class="bg-[#131822] border border-[#1F2937] rounded-2xl p-4 flex flex-col justify-between hover:border-gray-700 transition-colors">
+          <span class="font-mono text-[11px] uppercase tracking-wider text-gray-400">${k.label}</span>
+          <div class="text-2xl sm:text-3xl font-extrabold font-mono ${k.accent} my-1.5">${k.value}</div>
+          <span class="text-[11px] text-gray-400 truncate" title="${esc(k.sub)}">${esc(k.sub)}</span>
+        </div>
+      `).join('');
+
+      // 2. Library Breakdown
+      document.getElementById('breakdown-total').textContent = `${total} total`;
+      document.getElementById('status-bars').innerHTML = STATUSES.map(st => {
+        const count = byStatus[st].length;
+        const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+        const style = STATUS_STYLES[st];
+        return `
+          <div>
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="flex items-center gap-2 font-medium text-gray-200">
+                <span class="w-2 h-2 rounded-full ${style.dot}"></span>
+                ${st}
+              </span>
+              <span class="font-mono text-gray-400"><strong class="text-white">${count}</strong> (${pct}%)</span>
+            </div>
+            <div class="w-full h-2 bg-[#0B0E14] rounded-full overflow-hidden">
+              <div class="h-full ${style.bar} rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 3. What Makes You Finish a Game (Completed vs Dropped)
+      const pillars = [
+        { key: 'overall', label: 'Overall' },
+        { key: 'story', label: 'Story' },
+        { key: 'graphics', label: 'Graphics' },
+        { key: 'gameplay', label: 'Gameplay' }
+      ];
+
+      let strongestPillar = { label: 'Story', gap: -99 };
+      const pillarRows = pillars.map(p => {
+        const compAvg = mean(completed.map(g => g[p.key]));
+        const dropAvg = mean(dropped.map(g => g[p.key]));
+        const gap = (compAvg !== null && dropAvg !== null) ? (compAvg - dropAvg) : null;
+        if (gap !== null && gap > strongestPillar.gap) {
+          strongestPillar = { label: p.label, gap };
+        }
+        const compPct = compAvg ? (compAvg / 10) * 100 : 0;
+        const dropPct = dropAvg ? (dropAvg / 10) * 100 : 0;
+        const gapBadge = gap !== null
+          ? `<span class="font-mono text-[11px] px-2 py-0.5 rounded ${gap >= 1 ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30' : 'bg-[#0B0E14] text-gray-400 border border-[#1F2937]'}">${gap >= 0 ? '+' : ''}${gap.toFixed(1)} gap</span>`
+          : '';
+
+        return `
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-semibold text-gray-200">${p.label}</span>
+              <div class="flex items-center gap-2.5">
+                <span class="font-mono text-emerald-400">${fmtNum(compAvg)}</span>
+                <span class="text-gray-600">vs</span>
+                <span class="font-mono text-rose-400">${fmtNum(dropAvg)}</span>
+                ${gapBadge}
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="w-full h-1.5 bg-[#0B0E14] rounded-full overflow-hidden">
+                <div class="h-full bg-emerald-500 rounded-full" style="width: ${compPct}%"></div>
+              </div>
+              <div class="w-full h-1.5 bg-[#0B0E14] rounded-full overflow-hidden">
+                <div class="h-full bg-rose-500 rounded-full" style="width: ${dropPct}%"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('finish-signal-bars').innerHTML = pillarRows;
+      document.getElementById('taste-signal-text').innerHTML = strongestPillar.gap > -99
+        ? `<strong>Strongest Completion Signal: ${strongestPillar.label} (+${strongestPillar.gap.toFixed(1)} pts).</strong> Visuals get you to install, but narrative stakes and mechanical agency decide whether you roll credits.`
+        : `Log more Completed and Dropped ratings to reveal your completion delta.`;
+
+      // 4. Core Hook Performance
+      document.getElementById('hook-breakdown').innerHTML = CORE_HOOKS.map(hook => {
+        const subset = games.filter(g => g.coreHook === hook);
+        const rated = subset.filter(g => typeof g.overall === 'number');
+        const avg = mean(rated.map(g => g.overall));
+        const comp = subset.filter(g => g.status === 'Completed').length;
+        const drop = subset.filter(g => g.status === 'Dropped').length;
+        const rate = (comp + drop) > 0 ? `${Math.round((comp / (comp + drop)) * 100)}%` : 'Queued';
+        return `
+          <div class="p-3 rounded-xl bg-[#0B0E14] border border-[#1F2937] flex items-center justify-between gap-3">
+            <div>
+              <div class="text-xs font-semibold text-gray-100">${hook}</div>
+              <div class="text-[11px] text-gray-400 mt-0.5">${subset.length} games · ${comp} finished</div>
+            </div>
+            <div class="flex items-center gap-3 font-mono text-xs">
+              <span class="px-2 py-0.5 rounded bg-[#131822] border border-[#1F2937] text-gray-300">${rate}</span>
+              <span class="font-bold text-amber-400 w-9 text-right">${avg !== null ? avg.toFixed(1) : '—'}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 5. Length Breakdown
+      const lengths = ['Short', 'Medium', 'Long', 'Massive'];
+      document.getElementById('length-breakdown').innerHTML = lengths.map(len => {
+        const subset = games.filter(g => g.length === len);
+        const comp = subset.filter(g => g.status === 'Completed').length;
+        const drop = subset.filter(g => g.status === 'Dropped').length;
+        const pct = (comp + drop) > 0 ? Math.round((comp / (comp + drop)) * 100) : null;
+        return `
+          <div>
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="text-gray-200 font-medium">${len} <span class="text-gray-500">(${subset.length})</span></span>
+              <span class="font-mono ${pct !== null ? 'text-cyan-400' : 'text-gray-500'}">${pct !== null ? pct + '%' : 'Queued'}</span>
+            </div>
+            <div class="w-full h-1.5 bg-[#0B0E14] rounded-full overflow-hidden">
+              <div class="h-full bg-cyan-500 rounded-full" style="width: ${pct !== null ? pct : 0}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 6. World Structure Breakdown
+      const worlds = ['Semi-open', 'Linear', 'Open'];
+      document.getElementById('world-breakdown').innerHTML = worlds.map(w => {
+        const subset = games.filter(g => g.world === w);
+        const comp = subset.filter(g => g.status === 'Completed').length;
+        const drop = subset.filter(g => g.status === 'Dropped').length;
+        const pct = (comp + drop) > 0 ? Math.round((comp / (comp + drop)) * 100) : 0;
+        return `
+          <div>
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="text-gray-200 font-medium">${w} <span class="text-gray-500">(${subset.length})</span></span>
+              <span class="font-mono text-indigo-400">${pct}%</span>
+            </div>
+            <div class="w-full h-1.5 bg-[#0B0E14] rounded-full overflow-hidden">
+              <div class="h-full bg-indigo-500 rounded-full" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 7. Formula Fatigue (Franchises with 2+ games)
+      const franchiseMap = {};
+      games.forEach(g => {
+        if (!g.franchise) return;
+        if (!franchiseMap[g.franchise]) franchiseMap[g.franchise] = [];
+        franchiseMap[g.franchise].push(g);
+      });
+      const multiFranchises = Object.entries(franchiseMap)
+        .filter(([, list]) => list.length >= 2)
+        .sort((a, b) => b[1].length - a[1].length);
+
+      document.getElementById('franchise-fatigue').innerHTML = multiFranchises.map(([name, list]) => {
+        const avg = mean(list.map(g => g.overall));
+        const comp = list.filter(g => g.status === 'Completed').length;
+        return `
+          <div class="px-3 py-2 rounded-xl bg-[#0B0E14] border border-[#1F2937] flex items-center justify-between text-xs">
+            <div>
+              <span class="font-semibold text-gray-200">${esc(name)}</span>
+              <span class="text-gray-500 ml-1.5 font-mono text-[11px]">${list.length} titles · ${comp} done</span>
+            </div>
+            <span class="font-mono font-semibold ${avg >= 9 ? 'text-emerald-400' : avg ? 'text-amber-400' : 'text-gray-500'}">
+              ${avg !== null ? avg.toFixed(1) + ' avg' : 'Backlog'}
+            </span>
+          </div>
+        `;
+      }).join('');
+
+      // 8. The Dealbreaker (Repetition Flag)
+      const reviewedGames = games.filter(g => (g.disliked && g.disliked.trim()) || (g.loved && g.loved.trim()) || typeof g.overall === 'number');
+      const flaggedGames = reviewedGames.filter(hasRepetitionFlag);
+      const repPct = reviewedGames.length > 0 ? Math.round((flaggedGames.length / reviewedGames.length) * 100) : 0;
+      document.getElementById('repetition-pct').textContent = `${repPct}%`;
+      document.getElementById('repetition-sub').textContent = `(${flaggedGames.length} of ${reviewedGames.length} reviewed)`;
+      document.getElementById('repetition-tags').innerHTML = flaggedGames.slice(0, 6).map(g => `
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/10 text-rose-300 border border-rose-500/20">${esc(g.title)}</span>
+      `).join('');
+
+      // 9. Vibe Bonus Outliers
+      const vibeList = games
+        .map(g => ({ game: g, bonus: calcVibeBonus(g) }))
+        .filter(x => x.bonus !== null && x.bonus >= 1.0)
+        .sort((a, b) => b.bonus - a.bonus)
+        .slice(0, 4);
+
+      document.getElementById('vibe-outliers').innerHTML = vibeList.map(({ game, bonus }) => `
+        <div class="flex items-center justify-between text-xs bg-[#0B0E14] px-2.5 py-1.5 rounded-lg border border-[#1F2937]">
+          <span class="text-gray-200 truncate pr-2">${esc(game.title)}</span>
+          <span class="font-mono text-amber-400 font-semibold shrink-0">+${bonus.toFixed(1)} (${game.overall})</span>
+        </div>
+      `).join('');
+
+      // 10. Hall of Fame (Completed >= 9.5)
+      const hof = completed.filter(g => typeof g.overall === 'number' && g.overall >= 9.5);
+      document.getElementById('hof-count').textContent = `${hof.length} titles`;
+      document.getElementById('hall-of-fame').innerHTML = hof.map(g => `
+        <div onclick="openGameModal(${g.id})" class="cursor-pointer group rounded-xl bg-[#0B0E14] border border-[#1F2937] hover:border-amber-500/50 overflow-hidden transition-all">
+          <div class="steam-aspect bg-[#131822] relative overflow-hidden">
+            <img src="${esc(g.coverUrl)}" alt="${esc(g.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.style.display='none'" />
+            <span class="absolute top-2 right-2 font-mono text-xs font-extrabold px-2 py-0.5 rounded bg-black/80 text-amber-400 border border-amber-500/40">${g.overall}/10</span>
+          </div>
+          <div class="p-3">
+            <div class="font-bold text-xs text-white truncate">${esc(g.title)}</div>
+            <div class="text-[11px] text-gray-400 mt-0.5 truncate">${esc(g.coreHook)} · ${esc(g.genre)}</div>
+          </div>
+        </div>
+      `).join('');
+
+      // 11. Up Next Queue
+      renderUpNext();
+    }
+
+    function setUpNextFilter(mode) {
+      upNextMode = mode;
+      const btnQw = document.getElementById('upnext-btn-qw');
+      const btnAll = document.getElementById('upnext-btn-all');
+      if (mode === 'quickwin') {
+        btnQw.className = 'px-2.5 py-1 rounded-md font-medium bg-amber-500/20 text-amber-300 border border-amber-500/30 transition-all';
+        btnAll.className = 'px-2.5 py-1 rounded-md font-medium text-gray-400 hover:text-white transition-all';
+        document.getElementById('upnext-subtitle').textContent = 'Curated 4–15 hr palate cleansers';
+      } else {
+        btnAll.className = 'px-2.5 py-1 rounded-md font-medium bg-amber-500/20 text-amber-300 border border-amber-500/30 transition-all';
+        btnQw.className = 'px-2.5 py-1 rounded-md font-medium text-gray-400 hover:text-white transition-all';
+        document.getElementById('upnext-subtitle').textContent = 'All queued Backlog & Wishlist titles';
+      }
+      renderUpNext();
+    }
+
+    function renderUpNext() {
+      let list = games.filter(g => g.status === 'Backlog' || g.status === 'Wishlist');
+      if (upNextMode === 'quickwin') {
+        list = list.filter(isQuickWin).sort((a, b) => quickWinRank(a) - quickWinRank(b));
+      }
+      document.getElementById('upnext-list').innerHTML = list.length ? list.map((g, idx) => `
+        <div onclick="openGameModal(${g.id})" class="cursor-pointer p-2.5 rounded-xl bg-[#0B0E14] hover:bg-[#181F2C] border border-[#1F2937] flex items-center gap-3 transition-colors">
+          <span class="font-mono text-xs text-gray-500 w-5 text-center">${idx + 1}</span>
+          <img src="${esc(g.coverUrl)}" alt="" class="w-16 h-8 object-cover rounded bg-[#131822] shrink-0" onerror="this.style.display='none'" />
+          <div class="min-w-0 flex-1">
+            <div class="text-xs font-semibold text-white truncate">${esc(g.title)}</div>
+            <div class="text-[11px] text-gray-400 truncate">${esc(stripQwTag(g.notes) || `${g.genre} · ${g.coreHook}`)}</div>
+          </div>
+          <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-[#131822] border border-[#1F2937] text-amber-300 shrink-0">${g.length}</span>
+        </div>
+      `).join('') : `<div class="text-xs text-gray-500 py-8 text-center">No games in this queue.</div>`;
+    }
+
+    // =========================================================================
+    // 5. LIBRARY RENDERING & FILTERING
+    // =========================================================================
+    // Rebuilt after every Sheet pull so values typed directly in the Sheet appear here too
+    function populateFilterDropdowns() {
+      const union = (base, key) => [...new Set([...base, ...games.map(g => g[key]).filter(Boolean)])];
+      const genres = union(GENRES, 'genre');
+      const hooks = union(CORE_HOOKS, 'coreHook');
+      const fill = (id, list, allLabel) => {
+        const sel = document.getElementById(id);
+        const prev = sel.value;
+        sel.innerHTML = (allLabel ? `<option value="All">${allLabel}</option>` : '') +
+          list.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join('');
+        if ([...sel.options].some(o => o.value === prev)) sel.value = prev;
+      };
+      fill('filter-genre', genres, `All Genres (${genres.length})`);
+      fill('form-genre', genres);
+      fill('filter-hook', hooks, 'All Core Hooks');
+      fill('form-hook', hooks);
+    }
+
+    function setStatusFilter(status) {
+      activeStatusFilter = status;
+      renderLibrary();
+    }
+
+    function resetFilters() {
+      activeStatusFilter = 'All';
+      document.getElementById('filter-search').value = '';
+      document.getElementById('filter-genre').value = 'All';
+      document.getElementById('filter-hook').value = 'All';
+      document.getElementById('filter-length').value = 'All';
+      document.getElementById('filter-sort').value = 'default';
+      renderLibrary();
+    }
+
+    function renderLibrary() {
+      // Status filter pills
+      const pillDefs = [
+        { key: 'All', label: 'All', count: games.length },
+        { key: 'Quick-Win', label: '⚡ Quick-Win', count: games.filter(g => g.status === 'Backlog' && isQuickWin(g)).length },
+        ...STATUSES.map(st => ({ key: st, label: st, count: games.filter(g => g.status === st).length }))
+      ];
+
+      document.getElementById('library-status-pills').innerHTML = pillDefs.map(p => {
+        const active = activeStatusFilter === p.key;
+        return `
+          <button onclick="setStatusFilter('${p.key}')" class="px-3 py-1.5 rounded-xl text-xs font-medium border transition-all flex items-center gap-1.5 ${
+            active
+              ? 'bg-indigo-600 text-white border-indigo-500 shadow-sm'
+              : 'bg-[#131822] text-gray-300 border-[#1F2937] hover:border-gray-600'
+          }">
+            <span>${p.label}</span>
+            <span class="font-mono text-[10px] px-1.5 py-0.2 rounded ${active ? 'bg-indigo-500 text-white' : 'bg-[#0B0E14] text-gray-400'}">${p.count}</span>
+          </button>
+        `;
+      }).join('');
+
+      // Apply filters
+      const q = document.getElementById('filter-search').value.trim().toLowerCase();
+      const genre = document.getElementById('filter-genre').value;
+      const hook = document.getElementById('filter-hook').value;
+      const length = document.getElementById('filter-length').value;
+      const sort = document.getElementById('filter-sort').value;
+
+      const hasActiveFilters = activeStatusFilter !== 'All' || q !== '' || genre !== 'All' || hook !== 'All' || length !== 'All';
+      document.getElementById('reset-filters-btn').classList.toggle('hidden', !hasActiveFilters);
+
+      let filtered = games.filter(g => {
+        if (activeStatusFilter === 'Quick-Win') {
+          if (!(g.status === 'Backlog' && isQuickWin(g))) return false;
+        } else if (activeStatusFilter !== 'All' && g.status !== activeStatusFilter) {
+          return false;
+        }
+        if (genre !== 'All' && g.genre !== genre) return false;
+        if (hook !== 'All' && g.coreHook !== hook) return false;
+        if (length !== 'All' && g.length !== length) return false;
+        if (q) {
+          const hay = `${esc(g.title)} ${g.franchise} ${esc(g.genre)} ${esc(g.loved)} ${esc(g.disliked)} ${esc(g.notes)}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      if (sort === 'rating-desc') {
+        filtered.sort((a, b) => (b.overall ?? -1) - (a.overall ?? -1));
+      } else if (sort === 'title-asc') {
+        filtered.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (sort === 'vibe-desc') {
+        filtered.sort((a, b) => (calcVibeBonus(b) ?? -99) - (calcVibeBonus(a) ?? -99));
+      }
+
+      document.getElementById('library-showing-text').textContent = `Showing ${filtered.length} of ${games.length} games`;
+
+      // Render Cards
+      document.getElementById('library-grid').innerHTML = filtered.map(g => {
+        const st = STATUS_STYLES[g.status] || STATUS_STYLES.Backlog;
+        const subAvg = calcSubAvg(g);
+        const vibe = calcVibeBonus(g);
+        const repFlag = hasRepetitionFlag(g);
+        const qw = isQuickWin(g);
+
+        return `
+          <div onclick="openGameModal(${g.id})" class="cursor-pointer group bg-[#131822] hover:bg-[#181F2C] border border-[#1F2937] hover:border-indigo-500/50 rounded-2xl overflow-hidden flex flex-col justify-between transition-all shadow-sm">
+            <div>
+              <!-- Cover Banner -->
+              <div class="steam-aspect bg-gradient-to-br from-[#181F2C] to-[#0B0E14] relative overflow-hidden">
+                ${g.coverUrl ? `<img src="${esc(g.coverUrl)}" alt="${esc(g.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.style.display='none'" />` : ''}
+                <div class="absolute inset-0 bg-gradient-to-t from-[#131822] via-transparent to-black/30"></div>
+
+                <!-- Top Left Status -->
+                <span class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold border backdrop-blur-md ${st.pill}">
+                  ${g.status}
+                </span>
+
+                <!-- Top Right Overall Rating -->
+                ${typeof g.overall === 'number' ? `
+                  <div class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-lg bg-black/80 border border-white/15 backdrop-blur-md font-mono text-xs font-bold text-white flex items-center gap-1">
+                    <span class="text-amber-400">★</span>${g.overall}
+                  </div>
+                ` : ''}
+
+                <!-- Bottom Badges -->
+                <div class="absolute bottom-2 left-2.5 right-2.5 flex items-center justify-between gap-1">
+                  <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-black/75 text-gray-200 border border-white/10 truncate">${esc(g.genre)}</span>
+                  ${qw ? `<span class="font-mono text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 shrink-0">⚡ Quick-Win</span>` : ''}
+                </div>
+              </div>
+
+              <!-- Card Body -->
+              <div class="p-4 space-y-2.5">
+                <div>
+                  <h3 class="font-bold text-sm text-white group-hover:text-indigo-300 transition-colors line-clamp-1">${esc(g.title)}</h3>
+                  <p class="text-[11px] text-gray-400 mt-0.5">${g.world} · ${g.length} · <span class="text-cyan-400/90">${esc(g.coreHook)}</span></p>
+                </div>
+
+                ${subAvg !== null ? `
+                  <div class="grid grid-cols-4 gap-1 bg-[#0B0E14] p-2 rounded-xl border border-[#1F2937] text-center font-mono text-[11px]">
+                    <div><span class="text-gray-500 block text-[9px]">STR</span><span class="text-gray-200">${g.story ?? '—'}</span></div>
+                    <div><span class="text-gray-500 block text-[9px]">GFX</span><span class="text-gray-200">${g.graphics ?? '—'}</span></div>
+                    <div><span class="text-gray-500 block text-[9px]">GMP</span><span class="text-gray-200">${g.gameplay ?? '—'}</span></div>
+                    <div><span class="text-gray-500 block text-[9px]">SUB</span><span class="text-indigo-300 font-semibold">${subAvg.toFixed(1)}</span></div>
+                  </div>
+                ` : ''}
+
+                ${g.loved ? `<p class="text-[11px] text-emerald-300/90 line-clamp-1"><span class="font-mono text-emerald-500">+</span> ${esc(g.loved)}</p>` : ''}
+                ${g.disliked ? `<p class="text-[11px] text-rose-300/90 line-clamp-1"><span class="font-mono text-rose-500">−</span> ${esc(g.disliked)}</p>` : ''}
+                ${(!g.loved && !g.disliked && g.notes) ? `<p class="text-[11px] text-gray-400 line-clamp-2">${esc(g.notes)}</p>` : ''}
+              </div>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="px-4 py-2.5 border-t border-[#1F2937]/80 flex items-center justify-between text-[11px] text-gray-400">
+              <span class="truncate">${esc(g.franchise || 'Standalone')}</span>
+              <div class="flex items-center gap-1.5 shrink-0">
+                ${vibe !== null && vibe >= 1 ? `<span class="font-mono text-[10px] text-amber-400" title="Vibe Bonus">+${vibe.toFixed(1)} vibe</span>` : ''}
+                ${repFlag ? `<span class="font-mono text-[10px] px-1.5 py-0.2 rounded bg-rose-500/10 text-rose-400 border border-rose-500/20">↻ Rep</span>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Render Table
+      document.getElementById('library-table-body').innerHTML = filtered.map(g => {
+        const st = STATUS_STYLES[g.status] || STATUS_STYLES.Backlog;
+        const subAvg = calcSubAvg(g);
+        const repFlag = hasRepetitionFlag(g);
+        return `
+          <tr onclick="openGameModal(${g.id})" class="cursor-pointer hover:bg-[#181F2C] transition-colors">
+            <td class="py-2.5 px-4">
+              <div class="flex items-center gap-3">
+                <img src="${esc(g.coverUrl)}" alt="" class="w-14 h-7 object-cover rounded bg-[#0B0E14] shrink-0" onerror="this.style.display='none'" />
+                <div>
+                  <div class="font-semibold text-white">${esc(g.title)}</div>
+                  <div class="text-[11px] text-gray-500">${esc(g.franchise || '')}</div>
+                </div>
+              </div>
+            </td>
+            <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded-full text-[11px] font-medium border ${st.pill}">${g.status}</span></td>
+            <td class="py-2.5 px-3 text-right font-mono font-bold text-white">${g.overall ?? '—'}</td>
+            <td class="py-2.5 px-3 text-right font-mono text-gray-400">${subAvg !== null ? subAvg.toFixed(1) : '—'}</td>
+            <td class="py-2.5 px-3 text-gray-300">${esc(g.genre)}</td>
+            <td class="py-2.5 px-3 text-gray-400">${g.world}</td>
+            <td class="py-2.5 px-3 font-mono text-gray-300">${g.length}</td>
+            <td class="py-2.5 px-3 text-cyan-400/90">${esc(g.coreHook)}</td>
+            <td class="py-2.5 px-3">${repFlag ? '<span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/20">↻ Repetition</span>' : ''}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function setLibraryLayout(layout) {
+      libraryLayout = layout;
+      const isGrid = layout === 'grid';
+      document.getElementById('library-grid').classList.toggle('hidden', !isGrid);
+      document.getElementById('library-table-wrap').classList.toggle('hidden', isGrid);
+      document.getElementById('view-btn-grid').className = isGrid
+        ? 'px-3 py-1.5 rounded-lg text-xs font-medium bg-[#1F2937] text-white flex items-center gap-1.5'
+        : 'px-3 py-1.5 rounded-lg text-xs font-medium text-gray-400 hover:text-white flex items-center gap-1.5';
+      document.getElementById('view-btn-table').className = !isGrid
+        ? 'px-3 py-1.5 rounded-lg text-xs font-medium bg-[#1F2937] text-white flex items-center gap-1.5'
+        : 'px-3 py-1.5 rounded-lg text-xs font-medium text-gray-400 hover:text-white flex items-center gap-1.5';
+    }
+
+    // =========================================================================
+    // 6. VIEW SWITCHING & MODAL CRUD
+    // =========================================================================
+    function switchView(view) {
+      currentView = view;
+      const isDash = view === 'dashboard';
+      document.getElementById('view-dashboard').classList.toggle('hidden', !isDash);
+      document.getElementById('view-library').classList.toggle('hidden', isDash);
+
+      document.getElementById('tab-dashboard').className = isDash
+        ? 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5 bg-indigo-600 text-white shadow-sm'
+        : 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5 text-gray-400 hover:text-white';
+      document.getElementById('tab-library').className = !isDash
+        ? 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5 bg-indigo-600 text-white shadow-sm'
+        : 'px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5 text-gray-400 hover:text-white';
+
+      if (isDash) renderDashboard();
+      else renderLibrary();
+    }
+
+    function handleSteamInput(val) {
+      const trimmed = val.trim();
+      const match = trimmed.match(/\/app\/(\d+)/) || trimmed.match(/^(\d{3,10})$/);
+      if (match) {
+        const appId = match[1];
+        const url = STEAM_CDN(appId);
+        document.getElementById('form-cover-url').value = url;
+        updateCoverPreview(url);
+      }
+    }
+
+    function updateCoverPreview(url) {
+      const img = document.getElementById('form-cover-preview');
+      const fallback = document.getElementById('form-cover-fallback');
+      if (url && url.trim()) {
+        img.src = url.trim();
+      } else {
+        img.classList.add('hidden');
+        fallback.classList.remove('hidden');
+      }
+    }
+
+    function recalcModalMath() {
+      const o = parseFloat(document.getElementById('form-overall').value);
+      const s = parseFloat(document.getElementById('form-story').value);
+      const g = parseFloat(document.getElementById('form-graphics').value);
+      const p = parseFloat(document.getElementById('form-gameplay').value);
+
+      const subs = [s, g, p].filter(v => !isNaN(v));
+      const subAvg = subs.length ? (subs.reduce((a, b) => a + b, 0) / subs.length) : null;
+      document.getElementById('live-sub-avg').textContent = subAvg !== null ? subAvg.toFixed(1) : '—';
+
+      const vibeEl = document.getElementById('live-vibe-bonus');
+      if (subAvg !== null && !isNaN(o)) {
+        const diff = o - subAvg;
+        vibeEl.textContent = `${diff >= 0 ? '+' : ''}${diff.toFixed(1)}`;
+        vibeEl.className = diff >= 0.8 ? 'text-amber-400 font-bold' : diff < -0.5 ? 'text-rose-400 font-bold' : 'text-gray-300';
+      } else {
+        vibeEl.textContent = '—';
+        vibeEl.className = 'text-gray-400';
+      }
+    }
+
+    function openGameModal(id = null) {
+      const modal = document.getElementById('game-modal');
+      const delBtn = document.getElementById('btn-delete-game');
+      resetDeleteBtn();
+
+      if (id !== null) {
+        const g = games.find(item => item.id === id);
+        if (!g) return;
+        document.getElementById('modal-title').textContent = `Edit · ${g.title}`;
+        document.getElementById('form-id').value = g.id;
+        document.getElementById('form-title').value = g.title;
+        document.getElementById('form-status').value = g.status;
+        document.getElementById('form-genre').value = g.genre || 'Action-Adventure';
+        document.getElementById('form-world').value = g.world || 'Linear';
+        document.getElementById('form-length').value = g.length || 'Medium';
+        document.getElementById('form-hook').value = g.coreHook || 'Adrenaline / Gunplay';
+        document.getElementById('form-franchise').value = g.franchise || '';
+        document.getElementById('form-replay').value = g.replay || '';
+        document.getElementById('form-finished').value = g.finished || '';
+        document.getElementById('form-overall').value = g.overall ?? '';
+        document.getElementById('form-story').value = g.story ?? '';
+        document.getElementById('form-graphics').value = g.graphics ?? '';
+        document.getElementById('form-gameplay').value = g.gameplay ?? '';
+        document.getElementById('form-loved').value = g.loved || '';
+        document.getElementById('form-disliked').value = g.disliked || '';
+        document.getElementById('form-notes').value = stripQwTag(g.notes);
+        document.getElementById('form-quickwin').checked = isQuickWin(g);
+        document.getElementById('form-steam-input').value = g.appId || '';
+        document.getElementById('form-cover-url').value = g.coverUrl || '';
+        updateCoverPreview(g.coverUrl || '');
+        delBtn.classList.remove('hidden');
+      } else {
+        document.getElementById('modal-title').textContent = 'Add Game to Library';
+        document.getElementById('game-form').reset();
+        document.getElementById('form-id').value = '';
+        document.getElementById('form-status').value = 'Backlog';
+        document.getElementById('form-genre').value = 'Action-Adventure';
+        document.getElementById('form-world').value = 'Linear';
+        document.getElementById('form-length').value = 'Short';
+        document.getElementById('form-hook').value = 'Adrenaline / Gunplay';
+        updateCoverPreview('');
+        delBtn.classList.add('hidden');
+      }
+
+      recalcModalMath();
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeGameModal() {
+      const modal = document.getElementById('game-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function parseRatingVal(id) {
+      const raw = document.getElementById(id).value;
+      if (raw === '' || raw === null) return null;
+      const num = parseFloat(raw);
+      return isNaN(num) ? null : Math.min(10, Math.max(1, num));
+    }
+
+    function saveGameForm(e) {
+      e.preventDefault();
+      const idRaw = document.getElementById('form-id').value;
+      const title = document.getElementById('form-title').value.trim();
+      if (!title) return;
+
+      const steamRaw = document.getElementById('form-steam-input').value.trim();
+      const idMatch = steamRaw.match(/\/app\/(\d+)/) || steamRaw.match(/^(\d{3,10})$/);
+      const appId = idMatch ? idMatch[1] : '';
+      let coverUrl = document.getElementById('form-cover-url').value.trim();
+      if (!coverUrl && appId) coverUrl = STEAM_CDN(appId);
+
+      const existing = idRaw ? games.find(g => g.id === Number(idRaw)) : null;
+
+      // Block duplicate titles (the Sheet matches games by Title)
+      const clash = games.find(g => g.title.trim().toLowerCase() === title.toLowerCase() && (!existing || g.id !== existing.id));
+      if (clash) {
+        showToast(`"${clash.title}" is already in your library`, 'error');
+        return;
+      }
+
+      // Keep the existing Quick-Win tag (e.g. "[Quick-Win #3]") so your ordering survives edits
+      const qwChecked = document.getElementById('form-quickwin').checked;
+      const cleanNotes = stripQwTag(document.getElementById('form-notes').value);
+      const tag = (existing && quickWinTag(existing)) || '[Quick-Win Queue]';
+      const finalNotes = qwChecked ? `${tag} ${cleanNotes}`.trim() : cleanNotes;
+
+      const entry = {
+        id: idRaw ? Number(idRaw) : (games.reduce((max, g) => Math.max(max, g.id), 0) + 1),
+        title,
+        status: document.getElementById('form-status').value,
+        overall: parseRatingVal('form-overall'),
+        story: parseRatingVal('form-story'),
+        graphics: parseRatingVal('form-graphics'),
+        gameplay: parseRatingVal('form-gameplay'),
+        replay: document.getElementById('form-replay').value,
+        genre: document.getElementById('form-genre').value,
+        world: document.getElementById('form-world').value,
+        franchise: document.getElementById('form-franchise').value.trim() || title,
+        platform: (existing && existing.platform) || 'PC',
+        length: document.getElementById('form-length').value,
+        coreHook: document.getElementById('form-hook').value,
+        finished: document.getElementById('form-finished').value.trim(),
+        loved: document.getElementById('form-loved').value.trim(),
+        disliked: document.getElementById('form-disliked').value.trim(),
+        notes: finalNotes,
+        appId,
+        coverUrl
+      };
+
+      if (existing) {
+        const idx = games.findIndex(g => g.id === existing.id);
+        if (idx !== -1) games[idx] = entry;
+        showToast(`Updated "${title}"`);
+      } else {
+        games.push(entry);
+        showToast(`Added "${title}" to ${entry.status}`);
+      }
+
+      saveGames();
+      closeGameModal();
+      renderDashboard();
+      renderLibrary();
+      populateFilterDropdowns();
+      queueSync({ action: 'upsert', matchTitle: existing ? existing.title : title, game: toSheet(entry) });
+    }
+
+    // Two-step delete: first click arms, second click deletes (also removes the Sheet row)
+    let deleteArmed = false;
+    function resetDeleteBtn() {
+      deleteArmed = false;
+      const b = document.getElementById('btn-delete-game');
+      b.textContent = 'Delete Entry';
+      b.className = 'hidden px-3.5 py-2 rounded-xl text-xs font-semibold text-rose-400 hover:bg-rose-500/10 border border-rose-500/20 transition-colors';
+    }
+    function deleteCurrentGame() {
+      const id = Number(document.getElementById('form-id').value);
+      const target = games.find(g => g.id === id);
+      if (!target) return;
+      const b = document.getElementById('btn-delete-game');
+      if (!deleteArmed) {
+        deleteArmed = true;
+        b.textContent = syncConfigured() ? 'Click again: deletes the Sheet row too' : 'Click again to delete';
+        b.className = 'px-3.5 py-2 rounded-xl text-xs font-semibold text-white bg-rose-600 hover:bg-rose-500 border border-rose-500 transition-colors';
+        return;
+      }
+      games = games.filter(g => g.id !== id);
+      saveGames();
+      closeGameModal();
+      renderDashboard();
+      renderLibrary();
+      showToast(`Removed "${target.title}"`);
+      queueSync({ action: 'delete', matchTitle: target.title });
+    }
+
+    // =========================================================================
+    // 7. PORTABILITY (CSV / JSON EXPORT & RESET)
+    // =========================================================================
+    function toggleDataMenu() {
+      document.getElementById('data-menu').classList.toggle('hidden');
+    }
+
+    document.addEventListener('click', (e) => {
+      const container = document.getElementById('data-menu-container');
+      if (container && !container.contains(e.target)) {
+        document.getElementById('data-menu').classList.add('hidden');
+      }
+    });
+
+    function csvEscape(val) {
+      if (val === null || val === undefined) return '';
+      const str = String(val);
+      if (str.includes(',') || str.includes('"') || str.includes('\n')) {
+        return `"${str.replace(/"/g, '""')}"`;
+      }
+      return str;
+    }
+
+    function exportCSV() {
+      document.getElementById('data-menu').classList.add('hidden');
+      // Matches Google Sheet Library columns B -> T
+      const headers = ['Title', 'Status', 'Rating', 'Sub Avg', 'Story', 'Graphics', 'Gameplay', 'Replay', 'Genre', 'World', 'Franchise', 'Platform', 'Length', 'Core Hook', 'Finished', 'Loved', 'Disliked', 'Notes', 'Flag', 'Cover URL'];
+      const rows = games.map(g => {
+        const sub = calcSubAvg(g);
+        return [
+          g.title,
+          g.status,
+          g.overall ?? '',
+          sub !== null ? sub.toFixed(1) : '',
+          g.story ?? '',
+          g.graphics ?? '',
+          g.gameplay ?? '',
+          g.replay || '',
+          g.genre,
+          g.world,
+          g.franchise,
+          g.platform || 'PC',
+          g.length,
+          g.coreHook,
+          g.finished || '',
+          g.loved || '',
+          g.disliked || '',
+          g.notes || '',
+          hasRepetitionFlag(g) ? '↻ Repetition' : '',
+          g.coverUrl || ''
+        ].map(csvEscape).join(',');
+      });
+      const blob = new Blob([[headers.join(','), ...rows].join('\n')], { type: 'text/csv;charset=utf-8;' });
+      downloadBlob(blob, 'Game_Logger_Export.csv');
+      showToast('Exported Google Sheet CSV');
+    }
+
+    function exportJSON() {
+      document.getElementById('data-menu').classList.add('hidden');
+      const blob = new Blob([JSON.stringify(games, null, 2)], { type: 'application/json' });
+      downloadBlob(blob, 'Game_Logger_Backup.json');
+      showToast('Exported JSON backup');
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function openResetConfirm() {
+      document.getElementById('data-menu').classList.add('hidden');
+      const m = document.getElementById('reset-modal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+
+    function closeResetConfirm() {
+      const m = document.getElementById('reset-modal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    function confirmResetData() {
+      games = JSON.parse(JSON.stringify(DEFAULT_GAMES));
+      saveGames();
+      closeResetConfirm();
+      populateFilterDropdowns();
+      renderDashboard();
+      renderLibrary();
+      showToast(`Restored ${DEFAULT_GAMES.length}-game snapshot (Sheet untouched)`);
+    }
+
+    function showToast(msg, kind = 'ok') {
+      const toast = document.getElementById('toast');
+      const isErr = kind === 'error';
+      document.getElementById('toast-box').className = `bg-[#131822] border ${isErr ? 'border-rose-500/50' : 'border-emerald-500/40'} text-gray-100 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-medium max-w-xs`;
+      document.getElementById('toast-dot').className = `w-2 h-2 rounded-full ${isErr ? 'bg-rose-400' : 'bg-emerald-400'} animate-pulse shrink-0`;
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => toast.classList.add('hidden'), isErr ? 5000 : 2600);
+    }
+
+    // =========================================================================
+    // 8. GOOGLE SHEET SYNC (Apps Script Web App)
+    //    - Sheet is the master copy. Page load / tab focus = pull.
+    //    - Every add/edit/delete is applied locally at once, then queued and
+    //      pushed in order. Offline? It stays queued and retries later.
+    // =========================================================================
+    const SYNC_KEY = 'game_logger_sync_v1';
+    const OUTBOX_KEY = 'game_logger_outbox_v1';
+    let sync = { url: '', token: '' };
+    let outbox = [];
+    let syncState = { kind: 'local', msg: '' };
+    let lastSyncAt = 0;
+    let syncBusy = false;
+
+    function loadSyncConfig() {
+      try { sync = Object.assign({ url: '', token: '' }, JSON.parse(localStorage.getItem(SYNC_KEY) || '{}')); } catch (_) {}
+      try { outbox = JSON.parse(localStorage.getItem(OUTBOX_KEY) || '[]'); } catch (_) { outbox = []; }
+      if (!Array.isArray(outbox)) outbox = [];
+    }
+    function saveSyncConfig() { try { localStorage.setItem(SYNC_KEY, JSON.stringify(sync)); } catch (_) {} }
+    function saveOutbox() { try { localStorage.setItem(OUTBOX_KEY, JSON.stringify(outbox)); } catch (_) {} }
+    function syncConfigured() { return !!(sync.url && sync.token); }
+
+    class SheetError extends Error {}
+    async function sheetApi(body, cfg = sync) {
+      let res;
+      try {
+        // text/plain avoids a CORS preflight, which Apps Script can't answer
+        res = await fetch(cfg.url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(Object.assign({}, body, { token: cfg.token })),
+          redirect: 'follow'
+        });
+      } catch (e) {
+        throw new Error('offline');
+      }
+      let data;
+      try { data = await res.json(); }
+      catch (_) { throw new SheetError('Unexpected reply. Is the URL the /exec Web App URL, with access set to "Anyone"?'); }
+      if (!data || data.status !== 'ok') throw new SheetError((data && data.message) || 'Sheet error');
+      return data;
+    }
+
+    function setSyncState(kind, msg = '') {
+      syncState = { kind, msg };
+      const map = {
+        local:   ['bg-gray-500', 'Local only'],
+        syncing: ['bg-cyan-400 animate-pulse', 'Syncing…'],
+        synced:  ['bg-emerald-400', 'Synced'],
+        offline: ['bg-amber-400', 'Offline'],
+        error:   ['bg-rose-500', 'Sync error']
+      };
+      let [dot, label] = map[kind] || map.local;
+      if (kind === 'synced' && lastSyncAt) label = `Synced · ${new Date(lastSyncAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`;
+      if ((kind === 'offline' || kind === 'error') && outbox.length) label += ` · ${outbox.length} queued`;
+      document.getElementById('sync-dot').className = `w-2 h-2 rounded-full ${dot}`;
+      document.getElementById('sync-dot-mobile').className = `block w-2.5 h-2.5 rounded-full ${dot}`;
+      document.getElementById('sync-label').textContent = label;
+      document.getElementById('sync-badge').title = msg || label;
+      renderSettingsStatus();
+    }
+
+    function queueSync(op) {
+      if (!syncConfigured()) return;
+      outbox.push(op);
+      saveOutbox();
+      flushOutbox();
+    }
+
+    // Push queued changes in order. Returns true when the queue is empty.
+    async function flushOutbox() {
+      if (!syncConfigured()) return false;
+      if (syncBusy) return false;
+      syncBusy = true;
+      setSyncState('syncing');
+      try {
+        while (outbox.length) {
+          const op = outbox[0];
+          try {
+            await sheetApi(op);
+            outbox.shift();
+            saveOutbox();
+          } catch (e) {
+            if (e.message === 'offline') { setSyncState('offline', 'No connection: changes will be pushed when you are back online.'); return false; }
+            if (e instanceof SheetError && /unauthorized|unexpected reply|not found|no "title"/i.test(e.message)) {
+              setSyncState('error', e.message); showToast(`Sheet sync: ${e.message}`, 'error'); return false;
+            }
+            // Data-level rejection (e.g. rename clash): drop this one change, tell the user, keep going
+            outbox.shift(); saveOutbox();
+            showToast(`Sheet rejected a change: ${e.message}`, 'error');
+          }
+        }
+        lastSyncAt = Date.now();
+        setSyncState('synced');
+        return true;
+      } finally {
+        syncBusy = false;
+      }
+    }
+
+    // Replace local data with the Sheet (only when nothing is waiting to be pushed)
+    async function pullFromSheet({ quiet = true } = {}) {
+      if (!syncConfigured()) return false;
+      // Don't swap data under an open edit form
+      if (quiet && !document.getElementById('game-modal').classList.contains('hidden')) return false;
+      const flushed = await flushOutbox();
+      if (!flushed && outbox.length) return false;
+      if (syncBusy) return false;
+      syncBusy = true;
+      setSyncState('syncing');
+      try {
+        const data = await sheetApi({ action: 'list' });
+        // A change was made while we were fetching: keep local, push it, pull next time
+        if (outbox.length) { setTimeout(flushOutbox, 0); return false; }
+        games = (data.games || []).filter(r => String(r['Title'] || '').trim()).map(fromSheet);
+        saveGames();
+        populateFilterDropdowns();
+        renderDashboard();
+        renderLibrary();
+        lastSyncAt = Date.now();
+        setSyncState('synced');
+        if (!quiet) showToast(`Pulled ${games.length} games from Sheet`);
+        return true;
+      } catch (e) {
+        if (e.message === 'offline') setSyncState('offline', 'No connection: showing the last saved copy.');
+        else { setSyncState('error', e.message); if (!quiet) showToast(`Sheet sync: ${e.message}`, 'error'); }
+        return false;
+      } finally {
+        syncBusy = false;
+      }
+    }
+
+    function menuPull() {
+      document.getElementById('data-menu').classList.add('hidden');
+      if (!syncConfigured()) { openSettings(); return; }
+      pullFromSheet({ quiet: false });
+    }
+
+    // ---------- Settings modal ----------
+    function openSettings() {
+      document.getElementById('set-url').value = sync.url || '';
+      document.getElementById('set-token').value = sync.token || '';
+      document.getElementById('connect-result').textContent = '';
+      renderSettingsStatus();
+      const m = document.getElementById('settings-modal');
+      m.classList.remove('hidden'); m.classList.add('flex');
+    }
+    function closeSettings() {
+      const m = document.getElementById('settings-modal');
+      m.classList.add('hidden'); m.classList.remove('flex');
+    }
+    function renderSettingsStatus() {
+      const dot = document.getElementById('settings-status-dot');
+      const txt = document.getElementById('settings-status-text');
+      if (!dot) return;
+      const tools = document.getElementById('settings-connected-tools');
+      tools.classList.toggle('hidden', !syncConfigured());
+      if (!syncConfigured()) {
+        dot.className = 'w-2 h-2 rounded-full bg-gray-500 shrink-0';
+        txt.textContent = 'Not connected: changes are saved in this browser only.';
+        return;
+      }
+      const colors = { synced: 'bg-emerald-400', syncing: 'bg-cyan-400 animate-pulse', offline: 'bg-amber-400', error: 'bg-rose-500', local: 'bg-gray-500' };
+      dot.className = `w-2 h-2 rounded-full ${colors[syncState.kind] || 'bg-gray-500'} shrink-0`;
+      const when = lastSyncAt ? new Date(lastSyncAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) : '';
+      const q = outbox.length ? ` · ${outbox.length} change(s) waiting` : '';
+      txt.textContent = {
+        synced: `Connected · last synced ${when}${q}`,
+        syncing: `Syncing…${q}`,
+        offline: `Offline${q}. Will retry automatically.`,
+        error: `Error: ${syncState.msg}${q}`,
+        local: `Connected${q}`
+      }[syncState.kind] || 'Connected';
+    }
+
+    function generateToken() {
+      const bytes = new Uint8Array(24);
+      crypto.getRandomValues(bytes);
+      const tok = btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+      document.getElementById('set-token').value = tok;
+      showToast('Token generated. Now copy Code.gs');
+    }
+
+    async function copyText(text) {
+      try { await navigator.clipboard.writeText(text); return true; }
+      catch (_) {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        let ok = false; try { ok = document.execCommand('copy'); } catch (_) {}
+        document.body.removeChild(ta);
+        return ok;
+      }
+    }
+
+    async function copyCodeGs() {
+      const tok = document.getElementById('set-token').value.trim();
+      if (!tok) { showToast('Generate a token first (step 1)', 'error'); return; }
+      const src = document.getElementById('codegs-template').textContent.replace('__TOKEN__', tok);
+      // Remember the token now so it survives a page reload mid-setup
+      sync.token = tok; saveSyncConfig();
+      const ok = await copyText(src);
+      showToast(ok ? 'Code.gs copied with your token' : 'Copy failed: your browser blocked the clipboard', ok ? 'ok' : 'error');
+    }
+
+    async function testAndConnect() {
+      const url = document.getElementById('set-url').value.trim();
+      const token = document.getElementById('set-token').value.trim();
+      const out = document.getElementById('connect-result');
+      if (!/^https:\/\/script\.google(usercontent)?\.com\/.+\/exec/.test(url)) { out.className = 'text-xs text-rose-400'; out.textContent = 'Paste the Web App URL ending in /exec'; return; }
+      if (!token) { out.className = 'text-xs text-rose-400'; out.textContent = 'Token missing (step 1)'; return; }
+      out.className = 'text-xs text-cyan-400'; out.textContent = 'Testing…';
+      const btn = document.getElementById('btn-connect'); btn.disabled = true;
+      try {
+        const data = await sheetApi({ action: 'list' }, { url, token });
+        sync = { url, token }; saveSyncConfig();
+        outbox = []; saveOutbox(); // fresh connection: the Sheet wins
+        out.className = 'text-xs text-emerald-400';
+        out.textContent = `Connected ✓ Found ${(data.games || []).length} games in the Sheet`;
+        await pullFromSheet({ quiet: true });
+        showToast('Connected to Google Sheet');
+      } catch (e) {
+        out.className = 'text-xs text-rose-400';
+        out.textContent = e.message === 'offline'
+          ? 'Could not reach the URL. Check it, and that access is "Anyone".'
+          : (/unauthorized/i.test(e.message) ? 'Token mismatch: re-copy Code.gs, paste, save, then Deploy → Manage deployments → New version.' : e.message);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function copyDeviceLink() {
+      const payload = btoa(unescape(encodeURIComponent(JSON.stringify({ u: sync.url, t: sync.token }))));
+      const link = `${location.origin}${location.pathname}#connect=${payload}`;
+      const ok = await copyText(link);
+      showToast(ok ? 'Device link copied. Open it on your phone' : 'Copy failed: your browser blocked the clipboard', ok ? 'ok' : 'error');
+    }
+
+    function disconnectSync() {
+      sync = { url: '', token: '' }; saveSyncConfig();
+      outbox = []; saveOutbox();
+      setSyncState('local');
+      showToast('Disconnected. This browser keeps its local copy');
+    }
+
+    // One-time link from another device: #connect=<base64 {u,t}>
+    function consumeConnectLink() {
+      const m = location.hash.match(/^#connect=(.+)$/);
+      if (!m) return;
+      try {
+        const cfg = JSON.parse(decodeURIComponent(escape(atob(m[1]))));
+        if (cfg.u && cfg.t) { sync = { url: cfg.u, token: cfg.t }; saveSyncConfig(); outbox = []; saveOutbox(); showToast('Device connected to your Sheet'); }
+      } catch (_) { showToast('That device link is invalid', 'error'); }
+      history.replaceState(null, '', location.pathname + location.search); // drop the token from the address bar
+    }
+
+    // =========================================================================
+    // 9. INITIALIZE
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-seed-count]').forEach(el => el.textContent = DEFAULT_GAMES.length);
+      loadSyncConfig();
+      consumeConnectLink();
+      loadGames();                 // instant render from this browser's last copy
+      populateFilterDropdowns();
+      document.getElementById('nav-count').textContent = games.length;
+      renderDashboard();
+      renderLibrary();
+      if (syncConfigured()) {
+        setSyncState('syncing');
+        pullFromSheet();           // then refresh from the Sheet
+      } else {
+        setSyncState('local');
+      }
+    });
+
+    // Back on the tab (e.g. switched from phone to PC): refresh if stale
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && syncConfigured() && Date.now() - lastSyncAt > 30000) pullFromSheet();
+    });
+    window.addEventListener('online', () => { if (syncConfigured()) pullFromSheet(); });
+  </script>
+</body>
+</html>
